@@ -29,7 +29,6 @@ namespace ExamManagerWinform
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageStudent = new System.Windows.Forms.TabPage();
             this.panelTableStudent = new System.Windows.Forms.Panel();
@@ -52,9 +51,6 @@ namespace ExamManagerWinform
             this.tabPageMarkExam = new System.Windows.Forms.TabPage();
             this.tabPageExam = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.comboBoxExamMinute = new System.Windows.Forms.ComboBox();
-            this.comboBoxExamHour = new System.Windows.Forms.ComboBox();
-            this.labelExamHour = new System.Windows.Forms.Label();
             this.dateTimePickerExam = new System.Windows.Forms.DateTimePicker();
             this.labelExamDate = new System.Windows.Forms.Label();
             this.textBoxNameExam = new System.Windows.Forms.TextBox();
@@ -70,8 +66,24 @@ namespace ExamManagerWinform
             this.dataGridViewExam = new System.Windows.Forms.DataGridView();
             this.btnReLoadExam = new System.Windows.Forms.Button();
             this.tabPageLevel = new System.Windows.Forms.TabPage();
+            this.dataGridViewLevel = new System.Windows.Forms.DataGridView();
+            this.tabPageTeacher = new System.Windows.Forms.TabPage();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.dataGridViewTeacher = new System.Windows.Forms.DataGridView();
+            this.btnReloadTeacher = new System.Windows.Forms.Button();
+            this.textBoxNameTeacher = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxIdTeacher = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnReFreshFormTeacher = new System.Windows.Forms.Button();
+            this.btnAddTeacher = new System.Windows.Forms.Button();
+            this.btnUpdateTeacher = new System.Windows.Forms.Button();
+            this.btnDeleteTeacher = new System.Windows.Forms.Button();
+            this.textBoxPhoneTeacher = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.radioBtnNamTeacher = new System.Windows.Forms.RadioButton();
+            this.radioBtnNuTeacher = new System.Windows.Forms.RadioButton();
             this.tabControl.SuspendLayout();
             this.tabPageStudent.SuspendLayout();
             this.panelTableStudent.SuspendLayout();
@@ -84,6 +96,10 @@ namespace ExamManagerWinform
             this.panel1.SuspendLayout();
             this.panelLeftExam.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExam)).BeginInit();
+            this.tabPageLevel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLevel)).BeginInit();
+            this.tabPageTeacher.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTeacher)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -97,6 +113,7 @@ namespace ExamManagerWinform
             this.tabControl.Controls.Add(this.tabPageMarkExam);
             this.tabControl.Controls.Add(this.tabPageExam);
             this.tabControl.Controls.Add(this.tabPageLevel);
+            this.tabControl.Controls.Add(this.tabPageTeacher);
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -298,14 +315,11 @@ namespace ExamManagerWinform
             this.tabPageExam.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageExam.Size = new System.Drawing.Size(955, 508);
             this.tabPageExam.TabIndex = 4;
-            this.tabPageExam.Text = "Kỳ thi";
+            this.tabPageExam.Text = "Khóa thi";
             this.tabPageExam.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.comboBoxExamMinute);
-            this.panel2.Controls.Add(this.comboBoxExamHour);
-            this.panel2.Controls.Add(this.labelExamHour);
             this.panel2.Controls.Add(this.dateTimePickerExam);
             this.panel2.Controls.Add(this.labelExamDate);
             this.panel2.Controls.Add(this.textBoxNameExam);
@@ -321,35 +335,10 @@ namespace ExamManagerWinform
             this.panel2.Size = new System.Drawing.Size(414, 508);
             this.panel2.TabIndex = 2;
             // 
-            // comboBoxExamMinute
-            // 
-            this.comboBoxExamMinute.FormattingEnabled = true;
-            this.comboBoxExamMinute.Location = new System.Drawing.Point(276, 206);
-            this.comboBoxExamMinute.Name = "comboBoxExamMinute";
-            this.comboBoxExamMinute.Size = new System.Drawing.Size(82, 21);
-            this.comboBoxExamMinute.TabIndex = 13;
-            this.comboBoxExamMinute.Text = "0 phút";
-            // 
-            // comboBoxExamHour
-            // 
-            this.comboBoxExamHour.FormattingEnabled = true;
-            this.comboBoxExamHour.Location = new System.Drawing.Point(158, 206);
-            this.comboBoxExamHour.Name = "comboBoxExamHour";
-            this.comboBoxExamHour.Size = new System.Drawing.Size(82, 21);
-            this.comboBoxExamHour.TabIndex = 12;
-            this.comboBoxExamHour.Text = "0 giờ";
-            // 
-            // labelExamHour
-            // 
-            this.labelExamHour.AutoSize = true;
-            this.labelExamHour.Location = new System.Drawing.Point(76, 209);
-            this.labelExamHour.Name = "labelExamHour";
-            this.labelExamHour.Size = new System.Drawing.Size(37, 13);
-            this.labelExamHour.TabIndex = 11;
-            this.labelExamHour.Text = "Giờ thi";
-            // 
             // dateTimePickerExam
             // 
+            this.dateTimePickerExam.CustomFormat = "MMMMdd, yyyy  |  HH:mm";
+            this.dateTimePickerExam.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerExam.Location = new System.Drawing.Point(158, 151);
             this.dateTimePickerExam.Name = "dateTimePickerExam";
             this.dateTimePickerExam.Size = new System.Drawing.Size(200, 20);
@@ -399,7 +388,7 @@ namespace ExamManagerWinform
             // 
             // btnReloadFormExam
             // 
-            this.btnReloadFormExam.Location = new System.Drawing.Point(169, 297);
+            this.btnReloadFormExam.Location = new System.Drawing.Point(169, 260);
             this.btnReloadFormExam.Name = "btnReloadFormExam";
             this.btnReloadFormExam.Size = new System.Drawing.Size(111, 38);
             this.btnReloadFormExam.TabIndex = 4;
@@ -409,16 +398,17 @@ namespace ExamManagerWinform
             // 
             // btnAddExam
             // 
-            this.btnAddExam.Location = new System.Drawing.Point(101, 252);
+            this.btnAddExam.Location = new System.Drawing.Point(101, 215);
             this.btnAddExam.Name = "btnAddExam";
             this.btnAddExam.Size = new System.Drawing.Size(75, 38);
             this.btnAddExam.TabIndex = 0;
             this.btnAddExam.Text = "THÊM";
             this.btnAddExam.UseVisualStyleBackColor = true;
+            this.btnAddExam.Click += new System.EventHandler(this.btnAddExam_Click);
             // 
             // btnUpdateExam
             // 
-            this.btnUpdateExam.Location = new System.Drawing.Point(263, 253);
+            this.btnUpdateExam.Location = new System.Drawing.Point(182, 215);
             this.btnUpdateExam.Name = "btnUpdateExam";
             this.btnUpdateExam.Size = new System.Drawing.Size(75, 38);
             this.btnUpdateExam.TabIndex = 2;
@@ -428,12 +418,13 @@ namespace ExamManagerWinform
             // 
             // btnDeleteExam
             // 
-            this.btnDeleteExam.Location = new System.Drawing.Point(182, 252);
+            this.btnDeleteExam.Location = new System.Drawing.Point(263, 215);
             this.btnDeleteExam.Name = "btnDeleteExam";
             this.btnDeleteExam.Size = new System.Drawing.Size(75, 38);
             this.btnDeleteExam.TabIndex = 1;
             this.btnDeleteExam.Text = "XÓA";
             this.btnDeleteExam.UseVisualStyleBackColor = true;
+            this.btnDeleteExam.Click += new System.EventHandler(this.btnDeleteExam_Click);
             // 
             // panel1
             // 
@@ -477,6 +468,7 @@ namespace ExamManagerWinform
             // 
             // tabPageLevel
             // 
+            this.tabPageLevel.Controls.Add(this.dataGridViewLevel);
             this.tabPageLevel.Location = new System.Drawing.Point(4, 22);
             this.tabPageLevel.Name = "tabPageLevel";
             this.tabPageLevel.Padding = new System.Windows.Forms.Padding(3);
@@ -484,6 +476,185 @@ namespace ExamManagerWinform
             this.tabPageLevel.TabIndex = 5;
             this.tabPageLevel.Text = "Trình độ";
             this.tabPageLevel.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewLevel
+            // 
+            this.dataGridViewLevel.AllowUserToAddRows = false;
+            this.dataGridViewLevel.AllowUserToDeleteRows = false;
+            this.dataGridViewLevel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewLevel.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewLevel.Name = "dataGridViewLevel";
+            this.dataGridViewLevel.Size = new System.Drawing.Size(949, 505);
+            this.dataGridViewLevel.TabIndex = 0;
+            // 
+            // tabPageTeacher
+            // 
+            this.tabPageTeacher.Controls.Add(this.radioBtnNuTeacher);
+            this.tabPageTeacher.Controls.Add(this.radioBtnNamTeacher);
+            this.tabPageTeacher.Controls.Add(this.label8);
+            this.tabPageTeacher.Controls.Add(this.textBoxPhoneTeacher);
+            this.tabPageTeacher.Controls.Add(this.label7);
+            this.tabPageTeacher.Controls.Add(this.textBoxNameTeacher);
+            this.tabPageTeacher.Controls.Add(this.label5);
+            this.tabPageTeacher.Controls.Add(this.textBoxIdTeacher);
+            this.tabPageTeacher.Controls.Add(this.label6);
+            this.tabPageTeacher.Controls.Add(this.btnReFreshFormTeacher);
+            this.tabPageTeacher.Controls.Add(this.btnAddTeacher);
+            this.tabPageTeacher.Controls.Add(this.btnUpdateTeacher);
+            this.tabPageTeacher.Controls.Add(this.btnDeleteTeacher);
+            this.tabPageTeacher.Controls.Add(this.btnReloadTeacher);
+            this.tabPageTeacher.Controls.Add(this.dataGridViewTeacher);
+            this.tabPageTeacher.Location = new System.Drawing.Point(4, 22);
+            this.tabPageTeacher.Name = "tabPageTeacher";
+            this.tabPageTeacher.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTeacher.Size = new System.Drawing.Size(955, 508);
+            this.tabPageTeacher.TabIndex = 6;
+            this.tabPageTeacher.Text = "Giáo viên";
+            this.tabPageTeacher.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewTeacher
+            // 
+            this.dataGridViewTeacher.AllowUserToAddRows = false;
+            this.dataGridViewTeacher.AllowUserToDeleteRows = false;
+            this.dataGridViewTeacher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewTeacher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewTeacher.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewTeacher.Name = "dataGridViewTeacher";
+            this.dataGridViewTeacher.Size = new System.Drawing.Size(502, 442);
+            this.dataGridViewTeacher.TabIndex = 0;
+            this.dataGridViewTeacher.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTeacher_CellClick);
+            // 
+            // btnReloadTeacher
+            // 
+            this.btnReloadTeacher.Location = new System.Drawing.Point(169, 459);
+            this.btnReloadTeacher.Name = "btnReloadTeacher";
+            this.btnReloadTeacher.Size = new System.Drawing.Size(138, 38);
+            this.btnReloadTeacher.TabIndex = 4;
+            this.btnReloadTeacher.Text = "LÀM MỚI DANH SÁCH";
+            this.btnReloadTeacher.UseVisualStyleBackColor = true;
+            this.btnReloadTeacher.Click += new System.EventHandler(this.btnReloadTeacher_Click);
+            // 
+            // textBoxNameTeacher
+            // 
+            this.textBoxNameTeacher.Location = new System.Drawing.Point(659, 102);
+            this.textBoxNameTeacher.Name = "textBoxNameTeacher";
+            this.textBoxNameTeacher.Size = new System.Drawing.Size(200, 20);
+            this.textBoxNameTeacher.TabIndex = 16;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(577, 105);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Tên giáo viên";
+            // 
+            // textBoxIdTeacher
+            // 
+            this.textBoxIdTeacher.Enabled = false;
+            this.textBoxIdTeacher.Location = new System.Drawing.Point(659, 46);
+            this.textBoxIdTeacher.Name = "textBoxIdTeacher";
+            this.textBoxIdTeacher.Size = new System.Drawing.Size(200, 20);
+            this.textBoxIdTeacher.TabIndex = 14;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(577, 49);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(16, 13);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Id";
+            // 
+            // btnReFreshFormTeacher
+            // 
+            this.btnReFreshFormTeacher.Location = new System.Drawing.Point(670, 319);
+            this.btnReFreshFormTeacher.Name = "btnReFreshFormTeacher";
+            this.btnReFreshFormTeacher.Size = new System.Drawing.Size(111, 38);
+            this.btnReFreshFormTeacher.TabIndex = 12;
+            this.btnReFreshFormTeacher.Text = "LÀM MỚI FORM";
+            this.btnReFreshFormTeacher.UseVisualStyleBackColor = true;
+            this.btnReFreshFormTeacher.Click += new System.EventHandler(this.btnReFreshFormTeacher_Click);
+            // 
+            // btnAddTeacher
+            // 
+            this.btnAddTeacher.Location = new System.Drawing.Point(602, 274);
+            this.btnAddTeacher.Name = "btnAddTeacher";
+            this.btnAddTeacher.Size = new System.Drawing.Size(75, 38);
+            this.btnAddTeacher.TabIndex = 9;
+            this.btnAddTeacher.Text = "THÊM";
+            this.btnAddTeacher.UseVisualStyleBackColor = true;
+            this.btnAddTeacher.Click += new System.EventHandler(this.btnAddTeacher_Click);
+            // 
+            // btnUpdateTeacher
+            // 
+            this.btnUpdateTeacher.Location = new System.Drawing.Point(683, 274);
+            this.btnUpdateTeacher.Name = "btnUpdateTeacher";
+            this.btnUpdateTeacher.Size = new System.Drawing.Size(75, 38);
+            this.btnUpdateTeacher.TabIndex = 11;
+            this.btnUpdateTeacher.Text = "SỬA";
+            this.btnUpdateTeacher.UseVisualStyleBackColor = true;
+            this.btnUpdateTeacher.Click += new System.EventHandler(this.btnUpdateTeacher_Click);
+            // 
+            // btnDeleteTeacher
+            // 
+            this.btnDeleteTeacher.Location = new System.Drawing.Point(764, 274);
+            this.btnDeleteTeacher.Name = "btnDeleteTeacher";
+            this.btnDeleteTeacher.Size = new System.Drawing.Size(75, 38);
+            this.btnDeleteTeacher.TabIndex = 10;
+            this.btnDeleteTeacher.Text = "XÓA";
+            this.btnDeleteTeacher.UseVisualStyleBackColor = true;
+            this.btnDeleteTeacher.Click += new System.EventHandler(this.btnDeleteTeacher_Click);
+            // 
+            // textBoxPhoneTeacher
+            // 
+            this.textBoxPhoneTeacher.Location = new System.Drawing.Point(659, 156);
+            this.textBoxPhoneTeacher.Name = "textBoxPhoneTeacher";
+            this.textBoxPhoneTeacher.Size = new System.Drawing.Size(200, 20);
+            this.textBoxPhoneTeacher.TabIndex = 18;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(577, 159);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(70, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Số điện thoại";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(577, 214);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(47, 13);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Giới tính";
+            // 
+            // radioBtnNamTeacher
+            // 
+            this.radioBtnNamTeacher.AutoSize = true;
+            this.radioBtnNamTeacher.Location = new System.Drawing.Point(659, 212);
+            this.radioBtnNamTeacher.Name = "radioBtnNamTeacher";
+            this.radioBtnNamTeacher.Size = new System.Drawing.Size(47, 17);
+            this.radioBtnNamTeacher.TabIndex = 20;
+            this.radioBtnNamTeacher.TabStop = true;
+            this.radioBtnNamTeacher.Text = "Nam";
+            this.radioBtnNamTeacher.UseVisualStyleBackColor = true;
+            this.radioBtnNamTeacher.Click += new System.EventHandler(this.radioBtnNamTeacher_Click);
+            // 
+            // radioBtnNuTeacher
+            // 
+            this.radioBtnNuTeacher.AutoSize = true;
+            this.radioBtnNuTeacher.Location = new System.Drawing.Point(774, 212);
+            this.radioBtnNuTeacher.Name = "radioBtnNuTeacher";
+            this.radioBtnNuTeacher.Size = new System.Drawing.Size(39, 17);
+            this.radioBtnNuTeacher.TabIndex = 21;
+            this.radioBtnNuTeacher.TabStop = true;
+            this.radioBtnNuTeacher.Text = "Nữ";
+            this.radioBtnNuTeacher.UseVisualStyleBackColor = true;
+            this.radioBtnNuTeacher.Click += new System.EventHandler(this.radioBtnNuTeacher_Click);
             // 
             // MainForm
             // 
@@ -512,6 +683,11 @@ namespace ExamManagerWinform
             this.panel1.ResumeLayout(false);
             this.panelLeftExam.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExam)).EndInit();
+            this.tabPageLevel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLevel)).EndInit();
+            this.tabPageTeacher.ResumeLayout(false);
+            this.tabPageTeacher.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTeacher)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -555,9 +731,22 @@ namespace ExamManagerWinform
         private System.Windows.Forms.Label labelNameExam;
         private System.Windows.Forms.DateTimePicker dateTimePickerExam;
         private System.Windows.Forms.Label labelExamDate;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.ComboBox comboBoxExamHour;
-        private System.Windows.Forms.Label labelExamHour;
-        private System.Windows.Forms.ComboBox comboBoxExamMinute;
+        private System.Windows.Forms.DataGridView dataGridViewLevel;
+        private System.Windows.Forms.TabPage tabPageTeacher;
+        private System.Windows.Forms.DataGridView dataGridViewTeacher;
+        private System.Windows.Forms.TextBox textBoxNameTeacher;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxIdTeacher;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnReFreshFormTeacher;
+        private System.Windows.Forms.Button btnAddTeacher;
+        private System.Windows.Forms.Button btnUpdateTeacher;
+        private System.Windows.Forms.Button btnDeleteTeacher;
+        private System.Windows.Forms.Button btnReloadTeacher;
+        private System.Windows.Forms.TextBox textBoxPhoneTeacher;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.RadioButton radioBtnNuTeacher;
+        private System.Windows.Forms.RadioButton radioBtnNamTeacher;
+        private System.Windows.Forms.Label label8;
     }
 }
