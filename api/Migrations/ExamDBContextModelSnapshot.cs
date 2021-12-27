@@ -69,6 +69,9 @@ namespace api.Migrations
                     b.Property<int>("levelId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("status")
+                        .HasColumnType("bit");
+
                     b.Property<int>("studentId")
                         .HasColumnType("int");
 
@@ -134,11 +137,8 @@ namespace api.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<TimeSpan>("beginTime")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("endTime")
-                        .HasColumnType("time");
+                    b.Property<int>("amount")
+                        .HasColumnType("int");
 
                     b.Property<int>("examinationId")
                         .HasColumnType("int");
@@ -201,6 +201,9 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("citizenCard")
+                        .IsUnique();
 
                     b.ToTable("Students");
                 });

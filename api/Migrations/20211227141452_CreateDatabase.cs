@@ -76,10 +76,9 @@ namespace api.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    beginTime = table.Column<TimeSpan>(type: "time", nullable: false),
-                    endTime = table.Column<TimeSpan>(type: "time", nullable: false),
                     examinationId = table.Column<int>(type: "int", nullable: false),
-                    levelId = table.Column<int>(type: "int", nullable: false)
+                    levelId = table.Column<int>(type: "int", nullable: false),
+                    amount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -106,7 +105,8 @@ namespace api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     examinationId = table.Column<int>(type: "int", nullable: false),
                     levelId = table.Column<int>(type: "int", nullable: false),
-                    studentId = table.Column<int>(type: "int", nullable: false)
+                    studentId = table.Column<int>(type: "int", nullable: false),
+                    status = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -216,6 +216,12 @@ namespace api.Migrations
                 name: "IX_Rooms_examinationId",
                 table: "Rooms",
                 column: "examinationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_citizenCard",
+                table: "Students",
+                column: "citizenCard",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Watchers_teacherId",

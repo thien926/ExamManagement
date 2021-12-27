@@ -9,10 +9,11 @@ namespace api.Models
     {
         public int Id { get; set; }
         public string name { get; set; }
-        public TimeSpan beginTime { get; set; }
-        public TimeSpan endTime { get; set; }
+        // public TimeSpan beginTime { get; set; }
+        // public TimeSpan endTime { get; set; }
         public int examinationId { get; set; }
         public int levelId { get; set; }
+        public int amount { get; set; }
 
         public virtual Examination examination { get; set; }
         public virtual Level level { get; set; }

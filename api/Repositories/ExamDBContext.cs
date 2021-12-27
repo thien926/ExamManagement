@@ -54,11 +54,14 @@ namespace api.Repositories
                 entity.Property(o => o.issuePlace).IsRequired();
                 entity.Property(o => o.phone).HasMaxLength(10).IsRequired();
                 entity.Property(o => o.email).HasMaxLength(320).IsRequired();
+
+                entity.HasIndex(o => o.citizenCard).IsUnique();
             });
 
             modelBuilder.Entity<RegistionForm>(entity => {
                 entity.ToTable("RegistionForms");
                 entity.HasKey(o => o.Id);
+                entity.Property(o => o.status).IsRequired();
 
                 entity.HasOne<Student>(o => o.student)
                     .WithMany(m => m.RegistionForms)
@@ -82,8 +85,8 @@ namespace api.Repositories
                 entity.ToTable("Rooms");
                 entity.HasKey(o => o.Id);
                 entity.Property(o => o.name).HasMaxLength(100).IsRequired();
-                entity.Property(o => o.beginTime).IsRequired();
-                entity.Property(o => o.endTime).IsRequired();
+                entity.Property(o => o.amount).IsRequired();
+                // entity.Property(o => o.endTime).IsRequired();
 
                 entity.HasOne<Examination>(o => o.examination)
                     .WithMany(m => m.Rooms)

@@ -16,6 +16,7 @@ namespace api.Models
         public float pointRead { get; set; }
         public int roomId { get; set; }
         public int studentId { get; set; }
+        
 
         public virtual Room room { get; set; }
         public virtual Student student { get; set; }
