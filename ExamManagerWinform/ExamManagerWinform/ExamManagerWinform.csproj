@@ -46,14 +46,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="BUSs\ExaminationBUS.cs" />
+    <Compile Include="BUSs\LevelBUS.cs" />
+    <Compile Include="BUSs\TeacherBUS.cs" />
+    <Compile Include="DAOs\DataProvider.cs" />
+    <Compile Include="DAOs\ExaminationDAO.cs" />
+    <Compile Include="DAOs\LevelDAO.cs" />
+    <Compile Include="DAOs\TeacherDAO.cs" />
+    <Compile Include="DTOs\ExaminationDTO.cs" />
+    <Compile Include="DTOs\TeacherDTO.cs" />
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
