@@ -11,6 +11,7 @@ namespace api.Models
         public int examinationId { get; set; }
         public int levelId { get; set; }
         public int studentId { get; set; }
+        public Boolean status { get; set; }
 
         public virtual Examination examination { get; set; }
         public virtual Level level { get; set; }
