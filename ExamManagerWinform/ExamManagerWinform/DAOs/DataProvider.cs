@@ -74,7 +74,12 @@ namespace ExamManagerWinform.DAOs
                     }
                 }
 
-                data = command.ExecuteNonQuery();
+                try{
+                    data = command.ExecuteNonQuery();
+                }
+                catch(Exception) {
+                    data = -1;
+                }
 
                 connection.Close();
             }

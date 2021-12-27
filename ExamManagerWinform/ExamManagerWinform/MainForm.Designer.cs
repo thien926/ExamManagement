@@ -32,6 +32,29 @@ namespace ExamManagerWinform
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageStudent = new System.Windows.Forms.TabPage();
             this.panelTableStudent = new System.Windows.Forms.Panel();
+            this.textBoxEmailStudent = new System.Windows.Forms.TextBox();
+            this.labelEmailStudent = new System.Windows.Forms.Label();
+            this.textBoxIssuePlaceStudent = new System.Windows.Forms.TextBox();
+            this.labelIssuePlaceStudent = new System.Windows.Forms.Label();
+            this.dateTimePickerIssueDateStudent = new System.Windows.Forms.DateTimePicker();
+            this.labelIssueDateStudent = new System.Windows.Forms.Label();
+            this.textBoxCCCDStudent = new System.Windows.Forms.TextBox();
+            this.labelCCCDStudent = new System.Windows.Forms.Label();
+            this.dateTimePickerBornDateStudent = new System.Windows.Forms.DateTimePicker();
+            this.labelBornDateStudent = new System.Windows.Forms.Label();
+            this.radioBtnNuStudent = new System.Windows.Forms.RadioButton();
+            this.radioBtnNamStudent = new System.Windows.Forms.RadioButton();
+            this.labelGenderStudent = new System.Windows.Forms.Label();
+            this.textBoxPhoneStudent = new System.Windows.Forms.TextBox();
+            this.labelPhoneStudent = new System.Windows.Forms.Label();
+            this.textBoxNameStudent = new System.Windows.Forms.TextBox();
+            this.labelNameStudent = new System.Windows.Forms.Label();
+            this.textBoxIdStudent = new System.Windows.Forms.TextBox();
+            this.labelIdStudent = new System.Windows.Forms.Label();
+            this.btnReFreshFormStudent = new System.Windows.Forms.Button();
+            this.btnAddStudent = new System.Windows.Forms.Button();
+            this.btnUpdateStudent = new System.Windows.Forms.Button();
+            this.btnDeleteStudent = new System.Windows.Forms.Button();
             this.dataGridViewStudent = new System.Windows.Forms.DataGridView();
             this.panelControl = new System.Windows.Forms.Panel();
             this.panelSearchWithInfo = new System.Windows.Forms.Panel();
@@ -68,9 +91,11 @@ namespace ExamManagerWinform
             this.tabPageLevel = new System.Windows.Forms.TabPage();
             this.dataGridViewLevel = new System.Windows.Forms.DataGridView();
             this.tabPageTeacher = new System.Windows.Forms.TabPage();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.dataGridViewTeacher = new System.Windows.Forms.DataGridView();
-            this.btnReloadTeacher = new System.Windows.Forms.Button();
+            this.radioBtnNuTeacher = new System.Windows.Forms.RadioButton();
+            this.radioBtnNamTeacher = new System.Windows.Forms.RadioButton();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxPhoneTeacher = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.textBoxNameTeacher = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxIdTeacher = new System.Windows.Forms.TextBox();
@@ -79,11 +104,10 @@ namespace ExamManagerWinform
             this.btnAddTeacher = new System.Windows.Forms.Button();
             this.btnUpdateTeacher = new System.Windows.Forms.Button();
             this.btnDeleteTeacher = new System.Windows.Forms.Button();
-            this.textBoxPhoneTeacher = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.radioBtnNamTeacher = new System.Windows.Forms.RadioButton();
-            this.radioBtnNuTeacher = new System.Windows.Forms.RadioButton();
+            this.btnReloadTeacher = new System.Windows.Forms.Button();
+            this.dataGridViewTeacher = new System.Windows.Forms.DataGridView();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.buttonRefreshStudent = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPageStudent.SuspendLayout();
             this.panelTableStudent.SuspendLayout();
@@ -134,22 +158,252 @@ namespace ExamManagerWinform
             // 
             // panelTableStudent
             // 
+            this.panelTableStudent.Controls.Add(this.buttonRefreshStudent);
+            this.panelTableStudent.Controls.Add(this.textBoxEmailStudent);
+            this.panelTableStudent.Controls.Add(this.labelEmailStudent);
+            this.panelTableStudent.Controls.Add(this.textBoxIssuePlaceStudent);
+            this.panelTableStudent.Controls.Add(this.labelIssuePlaceStudent);
+            this.panelTableStudent.Controls.Add(this.dateTimePickerIssueDateStudent);
+            this.panelTableStudent.Controls.Add(this.labelIssueDateStudent);
+            this.panelTableStudent.Controls.Add(this.textBoxCCCDStudent);
+            this.panelTableStudent.Controls.Add(this.labelCCCDStudent);
+            this.panelTableStudent.Controls.Add(this.dateTimePickerBornDateStudent);
+            this.panelTableStudent.Controls.Add(this.labelBornDateStudent);
+            this.panelTableStudent.Controls.Add(this.radioBtnNuStudent);
+            this.panelTableStudent.Controls.Add(this.radioBtnNamStudent);
+            this.panelTableStudent.Controls.Add(this.labelGenderStudent);
+            this.panelTableStudent.Controls.Add(this.textBoxPhoneStudent);
+            this.panelTableStudent.Controls.Add(this.labelPhoneStudent);
+            this.panelTableStudent.Controls.Add(this.textBoxNameStudent);
+            this.panelTableStudent.Controls.Add(this.labelNameStudent);
+            this.panelTableStudent.Controls.Add(this.textBoxIdStudent);
+            this.panelTableStudent.Controls.Add(this.labelIdStudent);
+            this.panelTableStudent.Controls.Add(this.btnReFreshFormStudent);
+            this.panelTableStudent.Controls.Add(this.btnAddStudent);
+            this.panelTableStudent.Controls.Add(this.btnUpdateStudent);
+            this.panelTableStudent.Controls.Add(this.btnDeleteStudent);
             this.panelTableStudent.Controls.Add(this.dataGridViewStudent);
-            this.panelTableStudent.Location = new System.Drawing.Point(3, 72);
+            this.panelTableStudent.Location = new System.Drawing.Point(3, 70);
             this.panelTableStudent.Name = "panelTableStudent";
             this.panelTableStudent.Size = new System.Drawing.Size(943, 433);
             this.panelTableStudent.TabIndex = 1;
             // 
+            // textBoxEmailStudent
+            // 
+            this.textBoxEmailStudent.Location = new System.Drawing.Point(712, 271);
+            this.textBoxEmailStudent.Name = "textBoxEmailStudent";
+            this.textBoxEmailStudent.Size = new System.Drawing.Size(200, 20);
+            this.textBoxEmailStudent.TabIndex = 40;
+            // 
+            // labelEmailStudent
+            // 
+            this.labelEmailStudent.AutoSize = true;
+            this.labelEmailStudent.Location = new System.Drawing.Point(630, 274);
+            this.labelEmailStudent.Name = "labelEmailStudent";
+            this.labelEmailStudent.Size = new System.Drawing.Size(32, 13);
+            this.labelEmailStudent.TabIndex = 39;
+            this.labelEmailStudent.Text = "Email";
+            // 
+            // textBoxIssuePlaceStudent
+            // 
+            this.textBoxIssuePlaceStudent.Location = new System.Drawing.Point(712, 234);
+            this.textBoxIssuePlaceStudent.Name = "textBoxIssuePlaceStudent";
+            this.textBoxIssuePlaceStudent.Size = new System.Drawing.Size(200, 20);
+            this.textBoxIssuePlaceStudent.TabIndex = 38;
+            // 
+            // labelIssuePlaceStudent
+            // 
+            this.labelIssuePlaceStudent.AutoSize = true;
+            this.labelIssuePlaceStudent.Location = new System.Drawing.Point(630, 237);
+            this.labelIssuePlaceStudent.Name = "labelIssuePlaceStudent";
+            this.labelIssuePlaceStudent.Size = new System.Drawing.Size(44, 13);
+            this.labelIssuePlaceStudent.TabIndex = 37;
+            this.labelIssuePlaceStudent.Text = "Nơi cấp";
+            // 
+            // dateTimePickerIssueDateStudent
+            // 
+            this.dateTimePickerIssueDateStudent.CustomFormat = "MMMMdd, yyyy ";
+            this.dateTimePickerIssueDateStudent.Location = new System.Drawing.Point(712, 197);
+            this.dateTimePickerIssueDateStudent.Name = "dateTimePickerIssueDateStudent";
+            this.dateTimePickerIssueDateStudent.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerIssueDateStudent.TabIndex = 36;
+            // 
+            // labelIssueDateStudent
+            // 
+            this.labelIssueDateStudent.AutoSize = true;
+            this.labelIssueDateStudent.Location = new System.Drawing.Point(630, 203);
+            this.labelIssueDateStudent.Name = "labelIssueDateStudent";
+            this.labelIssueDateStudent.Size = new System.Drawing.Size(53, 13);
+            this.labelIssueDateStudent.TabIndex = 35;
+            this.labelIssueDateStudent.Text = "Ngày cấp";
+            // 
+            // textBoxCCCDStudent
+            // 
+            this.textBoxCCCDStudent.Location = new System.Drawing.Point(712, 163);
+            this.textBoxCCCDStudent.Name = "textBoxCCCDStudent";
+            this.textBoxCCCDStudent.Size = new System.Drawing.Size(200, 20);
+            this.textBoxCCCDStudent.TabIndex = 34;
+            // 
+            // labelCCCDStudent
+            // 
+            this.labelCCCDStudent.AutoSize = true;
+            this.labelCCCDStudent.Location = new System.Drawing.Point(630, 166);
+            this.labelCCCDStudent.Name = "labelCCCDStudent";
+            this.labelCCCDStudent.Size = new System.Drawing.Size(36, 13);
+            this.labelCCCDStudent.TabIndex = 33;
+            this.labelCCCDStudent.Text = "CCCD";
+            // 
+            // dateTimePickerBornDateStudent
+            // 
+            this.dateTimePickerBornDateStudent.CustomFormat = "MMMMdd, yyyy";
+            this.dateTimePickerBornDateStudent.Location = new System.Drawing.Point(712, 127);
+            this.dateTimePickerBornDateStudent.Name = "dateTimePickerBornDateStudent";
+            this.dateTimePickerBornDateStudent.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerBornDateStudent.TabIndex = 32;
+            // 
+            // labelBornDateStudent
+            // 
+            this.labelBornDateStudent.AutoSize = true;
+            this.labelBornDateStudent.Location = new System.Drawing.Point(630, 133);
+            this.labelBornDateStudent.Name = "labelBornDateStudent";
+            this.labelBornDateStudent.Size = new System.Drawing.Size(54, 13);
+            this.labelBornDateStudent.TabIndex = 31;
+            this.labelBornDateStudent.Text = "Ngày sinh";
+            // 
+            // radioBtnNuStudent
+            // 
+            this.radioBtnNuStudent.AutoSize = true;
+            this.radioBtnNuStudent.Location = new System.Drawing.Point(827, 309);
+            this.radioBtnNuStudent.Name = "radioBtnNuStudent";
+            this.radioBtnNuStudent.Size = new System.Drawing.Size(39, 17);
+            this.radioBtnNuStudent.TabIndex = 30;
+            this.radioBtnNuStudent.TabStop = true;
+            this.radioBtnNuStudent.Text = "Nữ";
+            this.radioBtnNuStudent.UseVisualStyleBackColor = true;
+            // 
+            // radioBtnNamStudent
+            // 
+            this.radioBtnNamStudent.AutoSize = true;
+            this.radioBtnNamStudent.Location = new System.Drawing.Point(712, 309);
+            this.radioBtnNamStudent.Name = "radioBtnNamStudent";
+            this.radioBtnNamStudent.Size = new System.Drawing.Size(47, 17);
+            this.radioBtnNamStudent.TabIndex = 29;
+            this.radioBtnNamStudent.TabStop = true;
+            this.radioBtnNamStudent.Text = "Nam";
+            this.radioBtnNamStudent.UseVisualStyleBackColor = true;
+            // 
+            // labelGenderStudent
+            // 
+            this.labelGenderStudent.AutoSize = true;
+            this.labelGenderStudent.Location = new System.Drawing.Point(630, 311);
+            this.labelGenderStudent.Name = "labelGenderStudent";
+            this.labelGenderStudent.Size = new System.Drawing.Size(47, 13);
+            this.labelGenderStudent.TabIndex = 28;
+            this.labelGenderStudent.Text = "Giới tính";
+            // 
+            // textBoxPhoneStudent
+            // 
+            this.textBoxPhoneStudent.Location = new System.Drawing.Point(712, 92);
+            this.textBoxPhoneStudent.Name = "textBoxPhoneStudent";
+            this.textBoxPhoneStudent.Size = new System.Drawing.Size(200, 20);
+            this.textBoxPhoneStudent.TabIndex = 27;
+            // 
+            // labelPhoneStudent
+            // 
+            this.labelPhoneStudent.AutoSize = true;
+            this.labelPhoneStudent.Location = new System.Drawing.Point(630, 95);
+            this.labelPhoneStudent.Name = "labelPhoneStudent";
+            this.labelPhoneStudent.Size = new System.Drawing.Size(70, 13);
+            this.labelPhoneStudent.TabIndex = 26;
+            this.labelPhoneStudent.Text = "Số điện thoại";
+            // 
+            // textBoxNameStudent
+            // 
+            this.textBoxNameStudent.Location = new System.Drawing.Point(712, 56);
+            this.textBoxNameStudent.Name = "textBoxNameStudent";
+            this.textBoxNameStudent.Size = new System.Drawing.Size(200, 20);
+            this.textBoxNameStudent.TabIndex = 25;
+            // 
+            // labelNameStudent
+            // 
+            this.labelNameStudent.AutoSize = true;
+            this.labelNameStudent.Location = new System.Drawing.Point(630, 59);
+            this.labelNameStudent.Name = "labelNameStudent";
+            this.labelNameStudent.Size = new System.Drawing.Size(64, 13);
+            this.labelNameStudent.TabIndex = 24;
+            this.labelNameStudent.Text = "Tên thí sinh";
+            // 
+            // textBoxIdStudent
+            // 
+            this.textBoxIdStudent.Enabled = false;
+            this.textBoxIdStudent.Location = new System.Drawing.Point(712, 25);
+            this.textBoxIdStudent.Name = "textBoxIdStudent";
+            this.textBoxIdStudent.Size = new System.Drawing.Size(200, 20);
+            this.textBoxIdStudent.TabIndex = 23;
+            // 
+            // labelIdStudent
+            // 
+            this.labelIdStudent.AutoSize = true;
+            this.labelIdStudent.Location = new System.Drawing.Point(630, 28);
+            this.labelIdStudent.Name = "labelIdStudent";
+            this.labelIdStudent.Size = new System.Drawing.Size(16, 13);
+            this.labelIdStudent.TabIndex = 22;
+            this.labelIdStudent.Text = "Id";
+            // 
+            // btnReFreshFormStudent
+            // 
+            this.btnReFreshFormStudent.Location = new System.Drawing.Point(731, 393);
+            this.btnReFreshFormStudent.Name = "btnReFreshFormStudent";
+            this.btnReFreshFormStudent.Size = new System.Drawing.Size(111, 38);
+            this.btnReFreshFormStudent.TabIndex = 16;
+            this.btnReFreshFormStudent.Text = "LÀM MỚI FORM";
+            this.btnReFreshFormStudent.UseVisualStyleBackColor = true;
+            this.btnReFreshFormStudent.Click += new System.EventHandler(this.btnReFreshFormStudent_Click);
+            // 
+            // btnAddStudent
+            // 
+            this.btnAddStudent.Location = new System.Drawing.Point(663, 348);
+            this.btnAddStudent.Name = "btnAddStudent";
+            this.btnAddStudent.Size = new System.Drawing.Size(75, 38);
+            this.btnAddStudent.TabIndex = 13;
+            this.btnAddStudent.Text = "THÊM";
+            this.btnAddStudent.UseVisualStyleBackColor = true;
+            this.btnAddStudent.Click += new System.EventHandler(this.btnAddStudent_Click);
+            // 
+            // btnUpdateStudent
+            // 
+            this.btnUpdateStudent.Location = new System.Drawing.Point(744, 348);
+            this.btnUpdateStudent.Name = "btnUpdateStudent";
+            this.btnUpdateStudent.Size = new System.Drawing.Size(75, 38);
+            this.btnUpdateStudent.TabIndex = 15;
+            this.btnUpdateStudent.Text = "SỬA";
+            this.btnUpdateStudent.UseVisualStyleBackColor = true;
+            this.btnUpdateStudent.Click += new System.EventHandler(this.btnUpdateStudent_Click);
+            // 
+            // btnDeleteStudent
+            // 
+            this.btnDeleteStudent.Location = new System.Drawing.Point(825, 348);
+            this.btnDeleteStudent.Name = "btnDeleteStudent";
+            this.btnDeleteStudent.Size = new System.Drawing.Size(75, 38);
+            this.btnDeleteStudent.TabIndex = 14;
+            this.btnDeleteStudent.Text = "XÓA";
+            this.btnDeleteStudent.UseVisualStyleBackColor = true;
+            this.btnDeleteStudent.Click += new System.EventHandler(this.btnDeleteStudent_Click);
+            // 
             // dataGridViewStudent
             // 
+            this.dataGridViewStudent.AllowUserToAddRows = false;
+            this.dataGridViewStudent.AllowUserToDeleteRows = false;
             this.dataGridViewStudent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewStudent.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewStudent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewStudent.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewStudent.Name = "dataGridViewStudent";
-            this.dataGridViewStudent.Size = new System.Drawing.Size(946, 436);
+            this.dataGridViewStudent.Size = new System.Drawing.Size(600, 386);
             this.dataGridViewStudent.TabIndex = 0;
+            this.dataGridViewStudent.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStudent_CellClick);
             // 
             // panelControl
             // 
@@ -449,6 +703,7 @@ namespace ExamManagerWinform
             this.dataGridViewExam.AllowUserToDeleteRows = false;
             this.dataGridViewExam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewExam.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewExam.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewExam.Location = new System.Drawing.Point(0, 3);
             this.dataGridViewExam.Name = "dataGridViewExam";
@@ -481,6 +736,7 @@ namespace ExamManagerWinform
             // 
             this.dataGridViewLevel.AllowUserToAddRows = false;
             this.dataGridViewLevel.AllowUserToDeleteRows = false;
+            this.dataGridViewLevel.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridViewLevel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewLevel.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewLevel.Name = "dataGridViewLevel";
@@ -512,27 +768,54 @@ namespace ExamManagerWinform
             this.tabPageTeacher.Text = "Giáo viên";
             this.tabPageTeacher.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewTeacher
+            // radioBtnNuTeacher
             // 
-            this.dataGridViewTeacher.AllowUserToAddRows = false;
-            this.dataGridViewTeacher.AllowUserToDeleteRows = false;
-            this.dataGridViewTeacher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridViewTeacher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewTeacher.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewTeacher.Name = "dataGridViewTeacher";
-            this.dataGridViewTeacher.Size = new System.Drawing.Size(502, 442);
-            this.dataGridViewTeacher.TabIndex = 0;
-            this.dataGridViewTeacher.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTeacher_CellClick);
+            this.radioBtnNuTeacher.AutoSize = true;
+            this.radioBtnNuTeacher.Location = new System.Drawing.Point(774, 212);
+            this.radioBtnNuTeacher.Name = "radioBtnNuTeacher";
+            this.radioBtnNuTeacher.Size = new System.Drawing.Size(39, 17);
+            this.radioBtnNuTeacher.TabIndex = 21;
+            this.radioBtnNuTeacher.TabStop = true;
+            this.radioBtnNuTeacher.Text = "Nữ";
+            this.radioBtnNuTeacher.UseVisualStyleBackColor = true;
+            this.radioBtnNuTeacher.Click += new System.EventHandler(this.radioBtnNuTeacher_Click);
             // 
-            // btnReloadTeacher
+            // radioBtnNamTeacher
             // 
-            this.btnReloadTeacher.Location = new System.Drawing.Point(169, 459);
-            this.btnReloadTeacher.Name = "btnReloadTeacher";
-            this.btnReloadTeacher.Size = new System.Drawing.Size(138, 38);
-            this.btnReloadTeacher.TabIndex = 4;
-            this.btnReloadTeacher.Text = "LÀM MỚI DANH SÁCH";
-            this.btnReloadTeacher.UseVisualStyleBackColor = true;
-            this.btnReloadTeacher.Click += new System.EventHandler(this.btnReloadTeacher_Click);
+            this.radioBtnNamTeacher.AutoSize = true;
+            this.radioBtnNamTeacher.Location = new System.Drawing.Point(659, 212);
+            this.radioBtnNamTeacher.Name = "radioBtnNamTeacher";
+            this.radioBtnNamTeacher.Size = new System.Drawing.Size(47, 17);
+            this.radioBtnNamTeacher.TabIndex = 20;
+            this.radioBtnNamTeacher.TabStop = true;
+            this.radioBtnNamTeacher.Text = "Nam";
+            this.radioBtnNamTeacher.UseVisualStyleBackColor = true;
+            this.radioBtnNamTeacher.Click += new System.EventHandler(this.radioBtnNamTeacher_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(577, 214);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(47, 13);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Giới tính";
+            // 
+            // textBoxPhoneTeacher
+            // 
+            this.textBoxPhoneTeacher.Location = new System.Drawing.Point(659, 156);
+            this.textBoxPhoneTeacher.Name = "textBoxPhoneTeacher";
+            this.textBoxPhoneTeacher.Size = new System.Drawing.Size(200, 20);
+            this.textBoxPhoneTeacher.TabIndex = 18;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(577, 159);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(70, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Số điện thoại";
             // 
             // textBoxNameTeacher
             // 
@@ -607,54 +890,37 @@ namespace ExamManagerWinform
             this.btnDeleteTeacher.UseVisualStyleBackColor = true;
             this.btnDeleteTeacher.Click += new System.EventHandler(this.btnDeleteTeacher_Click);
             // 
-            // textBoxPhoneTeacher
+            // btnReloadTeacher
             // 
-            this.textBoxPhoneTeacher.Location = new System.Drawing.Point(659, 156);
-            this.textBoxPhoneTeacher.Name = "textBoxPhoneTeacher";
-            this.textBoxPhoneTeacher.Size = new System.Drawing.Size(200, 20);
-            this.textBoxPhoneTeacher.TabIndex = 18;
+            this.btnReloadTeacher.Location = new System.Drawing.Point(169, 459);
+            this.btnReloadTeacher.Name = "btnReloadTeacher";
+            this.btnReloadTeacher.Size = new System.Drawing.Size(138, 38);
+            this.btnReloadTeacher.TabIndex = 4;
+            this.btnReloadTeacher.Text = "LÀM MỚI DANH SÁCH";
+            this.btnReloadTeacher.UseVisualStyleBackColor = true;
+            this.btnReloadTeacher.Click += new System.EventHandler(this.btnReloadTeacher_Click);
             // 
-            // label7
+            // dataGridViewTeacher
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(577, 159);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 13);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Số điện thoại";
+            this.dataGridViewTeacher.AllowUserToAddRows = false;
+            this.dataGridViewTeacher.AllowUserToDeleteRows = false;
+            this.dataGridViewTeacher.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewTeacher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewTeacher.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewTeacher.Name = "dataGridViewTeacher";
+            this.dataGridViewTeacher.Size = new System.Drawing.Size(502, 442);
+            this.dataGridViewTeacher.TabIndex = 0;
+            this.dataGridViewTeacher.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTeacher_CellClick);
             // 
-            // label8
+            // buttonRefreshStudent
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(577, 214);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(47, 13);
-            this.label8.TabIndex = 19;
-            this.label8.Text = "Giới tính";
-            // 
-            // radioBtnNamTeacher
-            // 
-            this.radioBtnNamTeacher.AutoSize = true;
-            this.radioBtnNamTeacher.Location = new System.Drawing.Point(659, 212);
-            this.radioBtnNamTeacher.Name = "radioBtnNamTeacher";
-            this.radioBtnNamTeacher.Size = new System.Drawing.Size(47, 17);
-            this.radioBtnNamTeacher.TabIndex = 20;
-            this.radioBtnNamTeacher.TabStop = true;
-            this.radioBtnNamTeacher.Text = "Nam";
-            this.radioBtnNamTeacher.UseVisualStyleBackColor = true;
-            this.radioBtnNamTeacher.Click += new System.EventHandler(this.radioBtnNamTeacher_Click);
-            // 
-            // radioBtnNuTeacher
-            // 
-            this.radioBtnNuTeacher.AutoSize = true;
-            this.radioBtnNuTeacher.Location = new System.Drawing.Point(774, 212);
-            this.radioBtnNuTeacher.Name = "radioBtnNuTeacher";
-            this.radioBtnNuTeacher.Size = new System.Drawing.Size(39, 17);
-            this.radioBtnNuTeacher.TabIndex = 21;
-            this.radioBtnNuTeacher.TabStop = true;
-            this.radioBtnNuTeacher.Text = "Nữ";
-            this.radioBtnNuTeacher.UseVisualStyleBackColor = true;
-            this.radioBtnNuTeacher.Click += new System.EventHandler(this.radioBtnNuTeacher_Click);
+            this.buttonRefreshStudent.Location = new System.Drawing.Point(232, 389);
+            this.buttonRefreshStudent.Name = "buttonRefreshStudent";
+            this.buttonRefreshStudent.Size = new System.Drawing.Size(138, 38);
+            this.buttonRefreshStudent.TabIndex = 41;
+            this.buttonRefreshStudent.Text = "LÀM MỚI DANH SÁCH";
+            this.buttonRefreshStudent.UseVisualStyleBackColor = true;
+            this.buttonRefreshStudent.Click += new System.EventHandler(this.buttonRefreshStudent_Click);
             // 
             // MainForm
             // 
@@ -671,6 +937,7 @@ namespace ExamManagerWinform
             this.tabControl.ResumeLayout(false);
             this.tabPageStudent.ResumeLayout(false);
             this.panelTableStudent.ResumeLayout(false);
+            this.panelTableStudent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStudent)).EndInit();
             this.panelControl.ResumeLayout(false);
             this.panelSearchWithInfo.ResumeLayout(false);
@@ -748,5 +1015,29 @@ namespace ExamManagerWinform
         private System.Windows.Forms.RadioButton radioBtnNuTeacher;
         private System.Windows.Forms.RadioButton radioBtnNamTeacher;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnReFreshFormStudent;
+        private System.Windows.Forms.Button btnAddStudent;
+        private System.Windows.Forms.Button btnUpdateStudent;
+        private System.Windows.Forms.Button btnDeleteStudent;
+        private System.Windows.Forms.RadioButton radioBtnNuStudent;
+        private System.Windows.Forms.RadioButton radioBtnNamStudent;
+        private System.Windows.Forms.Label labelGenderStudent;
+        private System.Windows.Forms.TextBox textBoxPhoneStudent;
+        private System.Windows.Forms.Label labelPhoneStudent;
+        private System.Windows.Forms.TextBox textBoxNameStudent;
+        private System.Windows.Forms.Label labelNameStudent;
+        private System.Windows.Forms.TextBox textBoxIdStudent;
+        private System.Windows.Forms.Label labelIdStudent;
+        private System.Windows.Forms.DateTimePicker dateTimePickerBornDateStudent;
+        private System.Windows.Forms.Label labelBornDateStudent;
+        private System.Windows.Forms.TextBox textBoxCCCDStudent;
+        private System.Windows.Forms.Label labelCCCDStudent;
+        private System.Windows.Forms.TextBox textBoxIssuePlaceStudent;
+        private System.Windows.Forms.Label labelIssuePlaceStudent;
+        private System.Windows.Forms.DateTimePicker dateTimePickerIssueDateStudent;
+        private System.Windows.Forms.Label labelIssueDateStudent;
+        private System.Windows.Forms.TextBox textBoxEmailStudent;
+        private System.Windows.Forms.Label labelEmailStudent;
+        private System.Windows.Forms.Button buttonRefreshStudent;
     }
 }
