@@ -14,5 +14,9 @@ namespace ExamManagerWinform.BUSs
         {
             return LevelDAO.Instance.GetAll();
         }
+
+        public string[] getAllForRegister() {
+            return LevelDAO.Instance.getAllForRegister();
+        }
     }
 }

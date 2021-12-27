@@ -25,6 +25,7 @@ namespace ExamManagerWinform
             getLevelList();
             getTeacherList();
             getStudentList();
+            LoadComponentRegister();
         }
 
         #region Method LoadData Init
@@ -48,6 +49,52 @@ namespace ExamManagerWinform
             dataGridViewStudent.DataSource = studentBUS.GetAll();
         }
 
+        private void LoadComponentRegister()
+        {
+            var comboboxExam = examinationBUS.getAllForRegister();
+            var comboboxLevel = levelBUS.getAllForRegister();
+
+            comboBoxExamRegister.Items.Clear();
+            comboBoxExamRegister.Items.AddRange(comboboxExam);
+            comboBoxLevelRegister.Items.Clear();
+            comboBoxLevelRegister.Items.AddRange(comboboxLevel);
+        }
+
+        #endregion
+
+        #region Event TabControl
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (tabControl.SelectedIndex)
+            {
+                case 0:
+                    getStudentList();
+                    break;
+                case 1:
+                    LoadComponentRegister();
+                    break;
+                case 4:
+                    getExamList();
+                    break;
+                case 5:
+                    getLevelList();
+                    break;
+                case 6:
+                    getTeacherList();
+                    break;
+
+                default:
+                    break;
+            }
+            
+        }
+        #endregion
+
+        #region Events Commons
+        private void textBoxNotChar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
         #endregion
 
         #region Events Examinations
@@ -685,6 +732,84 @@ namespace ExamManagerWinform
             textBoxEmailStudent.Text = "";
         }
 
+
+
+
+        #endregion
+
+        #region Events Register
+        private void btnSearchCCCDRegister_Click(object sender, EventArgs e)
+        {
+            string CCCD = textBoxSearchCCCDRegister.Text;
+            Boolean flag = true;
+            if (CCCD.Equals(""))
+            {
+                flag = false;
+            }
+            else
+            {
+                var temp = Regex.IsMatch(CCCD, @"^([0-9]{12})$");
+                if (!temp)
+                {
+                    flag = false;
+                }
+            }
+            if(flag)
+            {
+                var student = studentBUS.getStudentWithCCCD(CCCD);
+                if(student != null)
+                {
+                    textBoxIdRegister.Text = student.Id.ToString();
+                    textBoxNameRegister.Text = student.name;
+                    textBoxPhoneRegister.Text = student.phone;
+                    dateTimePickerBornRegister.Value = student.bornDate;
+                    textBoxCCCDRegister.Text = student.citizenCard;
+                    dateTimePickerIssueRegister.Value = student.issueDate;
+                    textBoxIssuePLaceRegister.Text = student.issuePlace;
+                    textBoxEmailRegister.Text = student.email;
+                    if (student.gender.Equals("Nam"))
+                    {
+                        radioBtnNamRegister.Checked = true;
+                        radioBtnNuRegister.Checked = false;
+
+                        radioBtnNamRegister.Enabled = true;
+                        radioBtnNuRegister.Enabled = false;
+                    }
+                    else
+                    {
+                        radioBtnNamRegister.Checked = false;
+                        radioBtnNuRegister.Checked = true;
+
+                        radioBtnNamRegister.Enabled = false;
+                        radioBtnNuRegister.Enabled = true;
+                    }
+                }
+                else
+                {
+                    btnCancelRegister_Click(sender, e);
+                }
+            }
+            else
+            {
+                btnCancelRegister_Click(sender, e);
+            }
+        }
+
+        private void btnCancelRegister_Click(object sender, EventArgs e)
+        {
+            textBoxIdRegister.Text = "";
+            textBoxNameRegister.Text = "";
+            textBoxPhoneRegister.Text = "";
+            dateTimePickerBornRegister.Value = System.DateTime.Now;
+            textBoxCCCDRegister.Text = "";
+            dateTimePickerIssueRegister.Value = System.DateTime.Now;
+            textBoxIssuePLaceRegister.Text = "";
+            textBoxEmailRegister.Text = "";
+            radioBtnNamRegister.Checked = false;
+            radioBtnNuRegister.Checked = false;
+            radioBtnNamRegister.Enabled = true;
+            radioBtnNuRegister.Enabled = true;
+        }
         #endregion
 
 
