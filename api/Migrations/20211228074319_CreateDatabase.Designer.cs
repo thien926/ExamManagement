@@ -10,7 +10,7 @@ using api.Repositories;
 namespace api.Migrations
 {
     [DbContext(typeof(ExamDBContext))]
-    [Migration("20211227141452_CreateDatabase")]
+    [Migration("20211228074319_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,11 +79,12 @@ namespace api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("examinationId");
-
                     b.HasIndex("levelId");
 
                     b.HasIndex("studentId");
+
+                    b.HasIndex("examinationId", "levelId", "studentId")
+                        .IsUnique();
 
                     b.ToTable("RegistionForms");
                 });

@@ -77,11 +77,12 @@ namespace api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("examinationId");
-
                     b.HasIndex("levelId");
 
                     b.HasIndex("studentId");
+
+                    b.HasIndex("examinationId", "levelId", "studentId")
+                        .IsUnique();
 
                     b.ToTable("RegistionForms");
                 });
