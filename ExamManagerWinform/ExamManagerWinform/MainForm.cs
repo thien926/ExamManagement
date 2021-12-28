@@ -18,6 +18,7 @@ namespace ExamManagerWinform
         private LevelBUS levelBUS = new LevelBUS();
         private TeacherBUS teacherBUS = new TeacherBUS();
         private StudentBUS studentBUS = new StudentBUS();
+        private RegistionFormBUS registionFormBUS = new RegistionFormBUS();
         public MainForm()
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace ExamManagerWinform
             getLevelList();
             getTeacherList();
             getStudentList();
+            LoadComponentRegister();
         }
 
         #region Method LoadData Init
@@ -48,6 +50,65 @@ namespace ExamManagerWinform
             dataGridViewStudent.DataSource = studentBUS.GetAll();
         }
 
+        private void LoadComponentRegister()
+        {
+            var comboboxExam = examinationBUS.getAllForRegister();
+            var comboboxLevel = levelBUS.getAllForRegister();
+
+            comboBoxExamRegister.Items.Clear();
+            comboBoxExamRegister.Items.AddRange(comboboxExam);
+            comboBoxLevelRegister.Items.Clear();
+            comboBoxLevelRegister.Items.AddRange(comboboxLevel);
+        }
+
+        private void LoadComponentRegisterList()
+        {
+            var comboboxExam = examinationBUS.getAllForRegister();
+            var comboboxLevel = levelBUS.getAllForRegister();
+
+            comboBoxSearchExamRegisterList.Items.Clear();
+            comboBoxSearchExamRegisterList.Items.AddRange(comboboxExam);
+            comboBoxSearchLevelRegisterList.Items.Clear();
+            comboBoxSearchLevelRegisterList.Items.AddRange(comboboxLevel);
+        }
+
+        #endregion
+
+        #region Event TabControl
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (tabControl.SelectedIndex)
+            {
+                case 0:
+                    getStudentList();
+                    break;
+                case 1:
+                    LoadComponentRegister();
+                    break;
+                case 4:
+                    getExamList();
+                    break;
+                case 5:
+                    getLevelList();
+                    break;
+                case 6:
+                    getTeacherList();
+                    break;
+                case 7:
+                    LoadComponentRegisterList();
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+        #endregion
+
+        #region Events Commons
+        private void textBoxNotChar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
         #endregion
 
         #region Events Examinations
@@ -685,8 +746,247 @@ namespace ExamManagerWinform
             textBoxEmailStudent.Text = "";
         }
 
+
+
+
         #endregion
 
+        #region Events Register
+        private void btnSearchCCCDRegister_Click(object sender, EventArgs e)
+        {
+            string CCCD = textBoxSearchCCCDRegister.Text;
+            Boolean flag = true;
+            if (CCCD.Equals(""))
+            {
+                flag = false;
+            }
+            else
+            {
+                var temp = Regex.IsMatch(CCCD, @"^([0-9]{12})$");
+                if (!temp)
+                {
+                    flag = false;
+                }
+            }
+            if(flag)
+            {
+                var student = studentBUS.getStudentWithCCCD(CCCD);
+                if(student != null)
+                {
+                    textBoxIdRegister.Text = student.Id.ToString();
+                    textBoxNameRegister.Text = student.name;
+                    textBoxPhoneRegister.Text = student.phone;
+                    dateTimePickerBornRegister.Value = student.bornDate;
+                    textBoxCCCDRegister.Text = student.citizenCard;
+                    dateTimePickerIssueRegister.Value = student.issueDate;
+                    textBoxIssuePLaceRegister.Text = student.issuePlace;
+                    textBoxEmailRegister.Text = student.email;
+                    if (student.gender.Equals("Nam"))
+                    {
+                        radioBtnNamRegister.Checked = true;
+                        radioBtnNuRegister.Checked = false;
 
+                        radioBtnNamRegister.Enabled = true;
+                        radioBtnNuRegister.Enabled = false;
+                    }
+                    else
+                    {
+                        radioBtnNamRegister.Checked = false;
+                        radioBtnNuRegister.Checked = true;
+
+                        radioBtnNamRegister.Enabled = false;
+                        radioBtnNuRegister.Enabled = true;
+                    }
+                }
+                else
+                {
+                    btnCancelRegister_Click(sender, e);
+                }
+            }
+            else
+            {
+                btnCancelRegister_Click(sender, e);
+            }
+        }
+
+        private void btnCancelRegister_Click(object sender, EventArgs e)
+        {
+            textBoxIdRegister.Text = "";
+            textBoxNameRegister.Text = "";
+            textBoxPhoneRegister.Text = "";
+            dateTimePickerBornRegister.Value = System.DateTime.Now;
+            textBoxCCCDRegister.Text = "";
+            dateTimePickerIssueRegister.Value = System.DateTime.Now;
+            textBoxIssuePLaceRegister.Text = "";
+            textBoxEmailRegister.Text = "";
+            radioBtnNamRegister.Checked = false;
+            radioBtnNuRegister.Checked = false;
+            radioBtnNamRegister.Enabled = true;
+            radioBtnNuRegister.Enabled = true;
+            comboBoxExamRegister.Text = "";
+            comboBoxLevelRegister.Text = "";
+        }
+
+        private void btnSubmitRegister_Click(object sender, EventArgs e)
+        {
+            string message = "", examinationIdString = comboBoxExamRegister.Text;
+            string levelIdString = comboBoxLevelRegister.Text, studentIdString = textBoxIdRegister.Text;
+
+            if(studentIdString.Equals(""))
+            {
+                message += "Chưa chọn thí sinh cần đăng ký\n";
+            }
+
+            if (examinationIdString.Equals(""))
+            {
+                message += "Chưa chọn khóa thi cần đăng ký\n";
+            }
+
+            if (levelIdString.Equals(""))
+            {
+                message += "Chưa chọn trình độ cần đăng ký\n";
+            }
+
+            if(!message.Equals(""))
+            {
+                MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int studentId = int.Parse(studentIdString);
+
+            string[] examinationIdArray = examinationIdString.Split('-');
+            int examinationId = int.Parse(examinationIdArray[0]);
+
+            string[] levelIdArray = levelIdString.Split('-');
+            int levelId = int.Parse(levelIdArray[0]);
+
+            if(registionFormBUS.AddRegistionForm(examinationId, levelId, studentId, true))
+            {
+                MessageBox.Show("Đăng ký thành công!", "Đăng ký", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                getExamList();
+                btnReloadFormExam_Click(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("Đăng ký thất bại!", "Thêm", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        #region Events RegisterList
+        private void btnSearchRegisterList_Click(object sender, EventArgs e)
+        {
+            string CCCD = textBoxSearchCCCDRegisterList.Text;
+            if (!CCCD.Equals(""))
+            {
+                var temp = Regex.IsMatch(CCCD, @"^([0-9]{12})$");
+                if (!temp)
+                {
+                    dataGridViewRegisterList.DataSource = null;
+                    return;
+                }
+            }
+
+            string examinationId = comboBoxSearchExamRegisterList.Text;
+            if(examinationId.Equals(""))
+            {
+                dataGridViewRegisterList.DataSource = null;
+                return;
+            }
+            string[] exams = examinationId.Split('-');
+            examinationId = exams[0];
+
+            string levelId = comboBoxSearchLevelRegisterList.Text;
+            if (levelId.Equals(""))
+            {
+                dataGridViewRegisterList.DataSource = null;
+                return;
+            }
+            string[] level = levelId.Split('-');
+            levelId = level[0];
+
+            dataGridViewRegisterList.DataSource = registionFormBUS.GetWithExamLevel(int.Parse(examinationId), int.Parse(levelId), CCCD);
+        }
+
+        private void dataGridViewRegisterList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+            if (index < 0)
+            {
+                return;
+            }
+            DataGridViewRow selectedRow = dataGridViewRegisterList.Rows[index];
+
+
+            try
+            {
+                textBoxIdRegisterList.Text = selectedRow.Cells[0].Value.ToString();
+                textBoxStudentIdRegisterList.Text = selectedRow.Cells[1].Value.ToString();
+                textBoxExamIdRegisterList.Text = selectedRow.Cells[4].Value.ToString();
+                textBoxLevelIdRegisterList.Text = selectedRow.Cells[5].Value.ToString();
+                if (int.Parse(selectedRow.Cells[6].Value.ToString()) == 1)
+                {
+                    comboBoxStatusRegisterList.Text = "Đã đóng lệ phí";
+                }
+                else
+                {
+                    comboBoxStatusRegisterList.Text = "Chưa đóng lệ phí";
+                }
+            }
+            catch (Exception)
+            {
+                textBoxIdRegisterList.Text = "";
+                textBoxStudentIdRegisterList.Text = "";
+                textBoxExamIdRegisterList.Text = "";
+                textBoxLevelIdRegisterList.Text = "";
+                comboBoxStatusRegisterList.Text = "";
+            }
+        }
+
+        private void btnUpdateRegisterList_Click(object sender, EventArgs e)
+        {
+            string message = "";
+            string statusStr = comboBoxStatusRegisterList.Text;
+
+            if(statusStr.Equals("")) {
+                message += "Trạng thái không được rỗng\n";
+            }
+
+            if (!message.Equals(""))
+            {
+                MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int Id = int.Parse(textBoxIdRegisterList.Text);
+            Boolean status = false;
+            switch (statusStr)
+            {
+                case "Chưa đóng lệ phí":
+                    status = false;
+                    break;
+                case "Đã đóng lệ phí":
+                    status = true;
+                    break;
+                default:
+                    break;
+            }
+            
+            if (registionFormBUS.UpdateStatusRegistionForm(Id, status))
+            {
+                MessageBox.Show("Sửa thành công!", "Sửa phiếu đăng ký", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnReFreshFormStudent_Click(sender, e);
+                getStudentList();
+            }
+            else
+            {
+                MessageBox.Show("Sửa thất bại!", "Thêm phiếu đăng ký", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion
+
+        
     }
 }

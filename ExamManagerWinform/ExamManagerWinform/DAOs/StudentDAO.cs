@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace ExamManagerWinform.DAOs
     class StudentDAO
     {
         private static StudentDAO instance;
+        private string connectSTR = "Data Source=.\\SQLEXPRESS; Initial Catalog=EXAMDB;Integrated Security=true; uid=sa; password=1234567890";
         internal static StudentDAO Instance { get => (instance == null) ? (instance = new StudentDAO()) : instance; private set => instance = value; }
 
         private StudentDAO() { }
@@ -46,6 +48,80 @@ namespace ExamManagerWinform.DAOs
             int res = DataProvider.Instance.ExcuteNonQuery(query);
 
             return res > 0;
+        }
+
+        public StudentDTO getStudent(int Id)
+        {
+            string query = string.Format("SELECT [Id], [name], [gender], [bornDate], [citizenCard], [issueDate], [issuePlace], [phone], [email] FROM [dbo].[Students] WHERE [Id] = {0} ", Id);
+
+            StudentDTO data = null;
+
+            using (SqlConnection connection = new SqlConnection(connectSTR))
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                var reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    data = new StudentDTO();
+                    // Đọc từng dòng tập kết quả
+                    while (reader.Read())
+                    {
+                        data.Id = reader.GetInt32(0);
+                        data.name = reader.GetString(1);
+                        data.gender = reader.GetString(2);
+                        data.bornDate = reader.GetDateTime(3);
+                        data.citizenCard = reader.GetString(4);
+                        data.issueDate = reader.GetDateTime(5);
+                        data.issuePlace = reader.GetString(6);
+                        data.phone = reader.GetString(7);
+                        data.email = reader.GetString(8);
+                    }
+                }
+
+                connection.Close();
+            }
+
+            return data;
+        }
+
+        public StudentDTO getStudentWithCCCD(string CCCD)
+        {
+            string query = string.Format("SELECT [Id], [name], [gender], [bornDate], [citizenCard], [issueDate], [issuePlace], [phone], [email] FROM [dbo].[Students] WHERE [citizenCard] = '{0}' ", CCCD);
+
+            StudentDTO data = null;
+
+            using (SqlConnection connection = new SqlConnection(connectSTR))
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                var reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    data = new StudentDTO();
+                    // Đọc từng dòng tập kết quả
+                    while (reader.Read())
+                    {
+                        data.Id = reader.GetInt32(0);
+                        data.name = reader.GetString(1);
+                        data.gender = reader.GetString(2);
+                        data.bornDate = reader.GetDateTime(3);
+                        data.citizenCard = reader.GetString(4);
+                        data.issueDate = reader.GetDateTime(5);
+                        data.issuePlace = reader.GetString(6);
+                        data.phone = reader.GetString(7);
+                        data.email = reader.GetString(8);
+                    }
+                }
+
+                connection.Close();
+            }
+
+            return data;
         }
     }
 }

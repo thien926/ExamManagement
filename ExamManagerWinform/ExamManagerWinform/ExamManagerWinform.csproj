@@ -48,13 +48,16 @@
   <ItemGroup>
     <Compile Include="BUSs\ExaminationBUS.cs" />
     <Compile Include="BUSs\LevelBUS.cs" />
+    <Compile Include="BUSs\RegistionFormBUS.cs" />
     <Compile Include="BUSs\StudentBUS.cs" />
     <Compile Include="BUSs\TeacherBUS.cs" />
     <Compile Include="DAOs\DataProvider.cs" />
     <Compile Include="DAOs\ExaminationDAO.cs" />
     <Compile Include="DAOs\LevelDAO.cs" />
+    <Compile Include="DAOs\RegistionFormDAO.cs" />
     <Compile Include="DAOs\StudentDAO.cs" />
     <Compile Include="DAOs\TeacherDAO.cs" />
+    <Compile Include="DTOs\RegistionFormDTO.cs" />
     <Compile Include="DTOs\StudentDTO.cs" />
     <Compile Include="DTOs\ExaminationDTO.cs" />
     <Compile Include="DTOs\TeacherDTO.cs" />

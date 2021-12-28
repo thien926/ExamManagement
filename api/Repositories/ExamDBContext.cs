@@ -62,6 +62,7 @@ namespace api.Repositories
                 entity.ToTable("RegistionForms");
                 entity.HasKey(o => o.Id);
                 entity.Property(o => o.status).IsRequired();
+                entity.HasIndex(o => new { o.examinationId, o.levelId, o.studentId }).IsUnique();
 
                 entity.HasOne<Student>(o => o.student)
                     .WithMany(m => m.RegistionForms)

@@ -32,6 +32,7 @@ namespace ExamManagerWinform
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageStudent = new System.Windows.Forms.TabPage();
             this.panelTableStudent = new System.Windows.Forms.Panel();
+            this.buttonRefreshStudent = new System.Windows.Forms.Button();
             this.textBoxEmailStudent = new System.Windows.Forms.TextBox();
             this.labelEmailStudent = new System.Windows.Forms.Label();
             this.textBoxIssuePlaceStudent = new System.Windows.Forms.TextBox();
@@ -70,6 +71,35 @@ namespace ExamManagerWinform
             this.btnSearchExamRoom = new System.Windows.Forms.Button();
             this.textBoxExam = new System.Windows.Forms.TextBox();
             this.tabPageRegister = new System.Windows.Forms.TabPage();
+            this.btnCancelRegister = new System.Windows.Forms.Button();
+            this.btnSubmitRegister = new System.Windows.Forms.Button();
+            this.panelControlRegister = new System.Windows.Forms.Panel();
+            this.btnSearchCCCDRegister = new System.Windows.Forms.Button();
+            this.labelSearchCCCDRegister = new System.Windows.Forms.Label();
+            this.textBoxSearchCCCDRegister = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.comboBoxLevelRegister = new System.Windows.Forms.ComboBox();
+            this.comboBoxExamRegister = new System.Windows.Forms.ComboBox();
+            this.textBoxEmailRegister = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxIssuePLaceRegister = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.dateTimePickerIssueRegister = new System.Windows.Forms.DateTimePicker();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBoxCCCDRegister = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.dateTimePickerBornRegister = new System.Windows.Forms.DateTimePicker();
+            this.label13 = new System.Windows.Forms.Label();
+            this.radioBtnNuRegister = new System.Windows.Forms.RadioButton();
+            this.radioBtnNamRegister = new System.Windows.Forms.RadioButton();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBoxPhoneRegister = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBoxNameRegister = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBoxIdRegister = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.tabPageCreateRoom = new System.Windows.Forms.TabPage();
             this.tabPageMarkExam = new System.Windows.Forms.TabPage();
             this.tabPageExam = new System.Windows.Forms.TabPage();
@@ -107,7 +137,27 @@ namespace ExamManagerWinform
             this.btnReloadTeacher = new System.Windows.Forms.Button();
             this.dataGridViewTeacher = new System.Windows.Forms.DataGridView();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.buttonRefreshStudent = new System.Windows.Forms.Button();
+            this.tabPageRegisterList = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnSearchRegisterList = new System.Windows.Forms.Button();
+            this.labelCCCDRegisterList = new System.Windows.Forms.Label();
+            this.textBoxSearchCCCDRegisterList = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.comboBoxSearchLevelRegisterList = new System.Windows.Forms.ComboBox();
+            this.comboBoxSearchExamRegisterList = new System.Windows.Forms.ComboBox();
+            this.dataGridViewRegisterList = new System.Windows.Forms.DataGridView();
+            this.labelIdRegisterList = new System.Windows.Forms.Label();
+            this.textBoxIdRegisterList = new System.Windows.Forms.TextBox();
+            this.labelStudentIdRegisterList = new System.Windows.Forms.Label();
+            this.textBoxStudentIdRegisterList = new System.Windows.Forms.TextBox();
+            this.labelLevelIdRegisterList = new System.Windows.Forms.Label();
+            this.textBoxLevelIdRegisterList = new System.Windows.Forms.TextBox();
+            this.labelExamIdRegisterList = new System.Windows.Forms.Label();
+            this.textBoxExamIdRegisterList = new System.Windows.Forms.TextBox();
+            this.labelStatusRegisterList = new System.Windows.Forms.Label();
+            this.comboBoxStatusRegisterList = new System.Windows.Forms.ComboBox();
+            this.btnUpdateRegisterList = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPageStudent.SuspendLayout();
             this.panelTableStudent.SuspendLayout();
@@ -115,6 +165,8 @@ namespace ExamManagerWinform
             this.panelControl.SuspendLayout();
             this.panelSearchWithInfo.SuspendLayout();
             this.panelSearchWithRoom.SuspendLayout();
+            this.tabPageRegister.SuspendLayout();
+            this.panelControlRegister.SuspendLayout();
             this.tabPageExam.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -124,6 +176,9 @@ namespace ExamManagerWinform
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLevel)).BeginInit();
             this.tabPageTeacher.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTeacher)).BeginInit();
+            this.tabPageRegisterList.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRegisterList)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -138,11 +193,13 @@ namespace ExamManagerWinform
             this.tabControl.Controls.Add(this.tabPageExam);
             this.tabControl.Controls.Add(this.tabPageLevel);
             this.tabControl.Controls.Add(this.tabPageTeacher);
+            this.tabControl.Controls.Add(this.tabPageRegisterList);
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(963, 534);
             this.tabControl.TabIndex = 1;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabPageStudent
             // 
@@ -187,6 +244,16 @@ namespace ExamManagerWinform
             this.panelTableStudent.Name = "panelTableStudent";
             this.panelTableStudent.Size = new System.Drawing.Size(943, 433);
             this.panelTableStudent.TabIndex = 1;
+            // 
+            // buttonRefreshStudent
+            // 
+            this.buttonRefreshStudent.Location = new System.Drawing.Point(232, 389);
+            this.buttonRefreshStudent.Name = "buttonRefreshStudent";
+            this.buttonRefreshStudent.Size = new System.Drawing.Size(138, 38);
+            this.buttonRefreshStudent.TabIndex = 41;
+            this.buttonRefreshStudent.Text = "LÀM MỚI DANH SÁCH";
+            this.buttonRefreshStudent.UseVisualStyleBackColor = true;
+            this.buttonRefreshStudent.Click += new System.EventHandler(this.buttonRefreshStudent_Click);
             // 
             // textBoxEmailStudent
             // 
@@ -532,6 +599,32 @@ namespace ExamManagerWinform
             // 
             // tabPageRegister
             // 
+            this.tabPageRegister.Controls.Add(this.btnCancelRegister);
+            this.tabPageRegister.Controls.Add(this.btnSubmitRegister);
+            this.tabPageRegister.Controls.Add(this.panelControlRegister);
+            this.tabPageRegister.Controls.Add(this.label19);
+            this.tabPageRegister.Controls.Add(this.label18);
+            this.tabPageRegister.Controls.Add(this.comboBoxLevelRegister);
+            this.tabPageRegister.Controls.Add(this.comboBoxExamRegister);
+            this.tabPageRegister.Controls.Add(this.textBoxEmailRegister);
+            this.tabPageRegister.Controls.Add(this.label9);
+            this.tabPageRegister.Controls.Add(this.textBoxIssuePLaceRegister);
+            this.tabPageRegister.Controls.Add(this.label10);
+            this.tabPageRegister.Controls.Add(this.dateTimePickerIssueRegister);
+            this.tabPageRegister.Controls.Add(this.label11);
+            this.tabPageRegister.Controls.Add(this.textBoxCCCDRegister);
+            this.tabPageRegister.Controls.Add(this.label12);
+            this.tabPageRegister.Controls.Add(this.dateTimePickerBornRegister);
+            this.tabPageRegister.Controls.Add(this.label13);
+            this.tabPageRegister.Controls.Add(this.radioBtnNuRegister);
+            this.tabPageRegister.Controls.Add(this.radioBtnNamRegister);
+            this.tabPageRegister.Controls.Add(this.label14);
+            this.tabPageRegister.Controls.Add(this.textBoxPhoneRegister);
+            this.tabPageRegister.Controls.Add(this.label15);
+            this.tabPageRegister.Controls.Add(this.textBoxNameRegister);
+            this.tabPageRegister.Controls.Add(this.label16);
+            this.tabPageRegister.Controls.Add(this.textBoxIdRegister);
+            this.tabPageRegister.Controls.Add(this.label17);
             this.tabPageRegister.Location = new System.Drawing.Point(4, 22);
             this.tabPageRegister.Name = "tabPageRegister";
             this.tabPageRegister.Padding = new System.Windows.Forms.Padding(3);
@@ -539,6 +632,269 @@ namespace ExamManagerWinform
             this.tabPageRegister.TabIndex = 1;
             this.tabPageRegister.Text = "Đăng ký";
             this.tabPageRegister.UseVisualStyleBackColor = true;
+            // 
+            // btnCancelRegister
+            // 
+            this.btnCancelRegister.Location = new System.Drawing.Point(711, 230);
+            this.btnCancelRegister.Name = "btnCancelRegister";
+            this.btnCancelRegister.Size = new System.Drawing.Size(125, 38);
+            this.btnCancelRegister.TabIndex = 67;
+            this.btnCancelRegister.Text = "LÀM MỚI FORM";
+            this.btnCancelRegister.UseVisualStyleBackColor = true;
+            this.btnCancelRegister.Click += new System.EventHandler(this.btnCancelRegister_Click);
+            // 
+            // btnSubmitRegister
+            // 
+            this.btnSubmitRegister.Location = new System.Drawing.Point(570, 230);
+            this.btnSubmitRegister.Name = "btnSubmitRegister";
+            this.btnSubmitRegister.Size = new System.Drawing.Size(125, 38);
+            this.btnSubmitRegister.TabIndex = 66;
+            this.btnSubmitRegister.Text = "ĐĂNG KÝ";
+            this.btnSubmitRegister.UseVisualStyleBackColor = true;
+            this.btnSubmitRegister.Click += new System.EventHandler(this.btnSubmitRegister_Click);
+            // 
+            // panelControlRegister
+            // 
+            this.panelControlRegister.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelControlRegister.Controls.Add(this.btnSearchCCCDRegister);
+            this.panelControlRegister.Controls.Add(this.labelSearchCCCDRegister);
+            this.panelControlRegister.Controls.Add(this.textBoxSearchCCCDRegister);
+            this.panelControlRegister.Location = new System.Drawing.Point(120, 6);
+            this.panelControlRegister.Name = "panelControlRegister";
+            this.panelControlRegister.Size = new System.Drawing.Size(709, 38);
+            this.panelControlRegister.TabIndex = 64;
+            // 
+            // btnSearchCCCDRegister
+            // 
+            this.btnSearchCCCDRegister.Location = new System.Drawing.Point(564, 7);
+            this.btnSearchCCCDRegister.Name = "btnSearchCCCDRegister";
+            this.btnSearchCCCDRegister.Size = new System.Drawing.Size(75, 23);
+            this.btnSearchCCCDRegister.TabIndex = 45;
+            this.btnSearchCCCDRegister.Text = "Tìm kiếm";
+            this.btnSearchCCCDRegister.UseVisualStyleBackColor = true;
+            this.btnSearchCCCDRegister.Click += new System.EventHandler(this.btnSearchCCCDRegister_Click);
+            // 
+            // labelSearchCCCDRegister
+            // 
+            this.labelSearchCCCDRegister.AutoSize = true;
+            this.labelSearchCCCDRegister.Location = new System.Drawing.Point(59, 12);
+            this.labelSearchCCCDRegister.Name = "labelSearchCCCDRegister";
+            this.labelSearchCCCDRegister.Size = new System.Drawing.Size(124, 13);
+            this.labelSearchCCCDRegister.TabIndex = 44;
+            this.labelSearchCCCDRegister.Text = "Tìm thí sinh theo CCCD: ";
+            // 
+            // textBoxSearchCCCDRegister
+            // 
+            this.textBoxSearchCCCDRegister.Location = new System.Drawing.Point(248, 9);
+            this.textBoxSearchCCCDRegister.Name = "textBoxSearchCCCDRegister";
+            this.textBoxSearchCCCDRegister.Size = new System.Drawing.Size(238, 20);
+            this.textBoxSearchCCCDRegister.TabIndex = 43;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(543, 146);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(47, 13);
+            this.label19.TabIndex = 63;
+            this.label19.Text = "Trình độ";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(543, 86);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(46, 13);
+            this.label18.TabIndex = 62;
+            this.label18.Text = "Khóa thi";
+            // 
+            // comboBoxLevelRegister
+            // 
+            this.comboBoxLevelRegister.FormattingEnabled = true;
+            this.comboBoxLevelRegister.Location = new System.Drawing.Point(636, 143);
+            this.comboBoxLevelRegister.Name = "comboBoxLevelRegister";
+            this.comboBoxLevelRegister.Size = new System.Drawing.Size(200, 21);
+            this.comboBoxLevelRegister.TabIndex = 61;
+            this.comboBoxLevelRegister.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNotChar_KeyPress);
+            // 
+            // comboBoxExamRegister
+            // 
+            this.comboBoxExamRegister.FormattingEnabled = true;
+            this.comboBoxExamRegister.Location = new System.Drawing.Point(636, 83);
+            this.comboBoxExamRegister.Name = "comboBoxExamRegister";
+            this.comboBoxExamRegister.Size = new System.Drawing.Size(200, 21);
+            this.comboBoxExamRegister.TabIndex = 60;
+            this.comboBoxExamRegister.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNotChar_KeyPress);
+            // 
+            // textBoxEmailRegister
+            // 
+            this.textBoxEmailRegister.Location = new System.Drawing.Point(231, 418);
+            this.textBoxEmailRegister.Name = "textBoxEmailRegister";
+            this.textBoxEmailRegister.Size = new System.Drawing.Size(200, 20);
+            this.textBoxEmailRegister.TabIndex = 59;
+            this.textBoxEmailRegister.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNotChar_KeyPress);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(104, 421);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(32, 13);
+            this.label9.TabIndex = 58;
+            this.label9.Text = "Email";
+            // 
+            // textBoxIssuePLaceRegister
+            // 
+            this.textBoxIssuePLaceRegister.Location = new System.Drawing.Point(231, 368);
+            this.textBoxIssuePLaceRegister.Name = "textBoxIssuePLaceRegister";
+            this.textBoxIssuePLaceRegister.Size = new System.Drawing.Size(200, 20);
+            this.textBoxIssuePLaceRegister.TabIndex = 57;
+            this.textBoxIssuePLaceRegister.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNotChar_KeyPress);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(104, 371);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(44, 13);
+            this.label10.TabIndex = 56;
+            this.label10.Text = "Nơi cấp";
+            // 
+            // dateTimePickerIssueRegister
+            // 
+            this.dateTimePickerIssueRegister.CustomFormat = "MMMMdd, yyyy ";
+            this.dateTimePickerIssueRegister.Enabled = false;
+            this.dateTimePickerIssueRegister.Location = new System.Drawing.Point(231, 317);
+            this.dateTimePickerIssueRegister.Name = "dateTimePickerIssueRegister";
+            this.dateTimePickerIssueRegister.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerIssueRegister.TabIndex = 55;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(104, 323);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(53, 13);
+            this.label11.TabIndex = 54;
+            this.label11.Text = "Ngày cấp";
+            // 
+            // textBoxCCCDRegister
+            // 
+            this.textBoxCCCDRegister.Location = new System.Drawing.Point(231, 269);
+            this.textBoxCCCDRegister.Name = "textBoxCCCDRegister";
+            this.textBoxCCCDRegister.Size = new System.Drawing.Size(200, 20);
+            this.textBoxCCCDRegister.TabIndex = 53;
+            this.textBoxCCCDRegister.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNotChar_KeyPress);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(104, 272);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(36, 13);
+            this.label12.TabIndex = 52;
+            this.label12.Text = "CCCD";
+            // 
+            // dateTimePickerBornRegister
+            // 
+            this.dateTimePickerBornRegister.CustomFormat = "MMMMdd, yyyy";
+            this.dateTimePickerBornRegister.Enabled = false;
+            this.dateTimePickerBornRegister.Location = new System.Drawing.Point(231, 224);
+            this.dateTimePickerBornRegister.Name = "dateTimePickerBornRegister";
+            this.dateTimePickerBornRegister.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerBornRegister.TabIndex = 51;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(104, 230);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(54, 13);
+            this.label13.TabIndex = 50;
+            this.label13.Text = "Ngày sinh";
+            // 
+            // radioBtnNuRegister
+            // 
+            this.radioBtnNuRegister.AutoSize = true;
+            this.radioBtnNuRegister.Location = new System.Drawing.Point(346, 465);
+            this.radioBtnNuRegister.Name = "radioBtnNuRegister";
+            this.radioBtnNuRegister.Size = new System.Drawing.Size(39, 17);
+            this.radioBtnNuRegister.TabIndex = 49;
+            this.radioBtnNuRegister.TabStop = true;
+            this.radioBtnNuRegister.Text = "Nữ";
+            this.radioBtnNuRegister.UseVisualStyleBackColor = true;
+            // 
+            // radioBtnNamRegister
+            // 
+            this.radioBtnNamRegister.AutoSize = true;
+            this.radioBtnNamRegister.Location = new System.Drawing.Point(231, 465);
+            this.radioBtnNamRegister.Name = "radioBtnNamRegister";
+            this.radioBtnNamRegister.Size = new System.Drawing.Size(47, 17);
+            this.radioBtnNamRegister.TabIndex = 48;
+            this.radioBtnNamRegister.TabStop = true;
+            this.radioBtnNamRegister.Text = "Nam";
+            this.radioBtnNamRegister.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(104, 467);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(47, 13);
+            this.label14.TabIndex = 47;
+            this.label14.Text = "Giới tính";
+            // 
+            // textBoxPhoneRegister
+            // 
+            this.textBoxPhoneRegister.Location = new System.Drawing.Point(231, 177);
+            this.textBoxPhoneRegister.Name = "textBoxPhoneRegister";
+            this.textBoxPhoneRegister.Size = new System.Drawing.Size(200, 20);
+            this.textBoxPhoneRegister.TabIndex = 46;
+            this.textBoxPhoneRegister.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNotChar_KeyPress);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(104, 180);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(70, 13);
+            this.label15.TabIndex = 45;
+            this.label15.Text = "Số điện thoại";
+            // 
+            // textBoxNameRegister
+            // 
+            this.textBoxNameRegister.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textBoxNameRegister.Location = new System.Drawing.Point(231, 130);
+            this.textBoxNameRegister.Name = "textBoxNameRegister";
+            this.textBoxNameRegister.Size = new System.Drawing.Size(200, 20);
+            this.textBoxNameRegister.TabIndex = 44;
+            this.textBoxNameRegister.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNotChar_KeyPress);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(104, 133);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(64, 13);
+            this.label16.TabIndex = 43;
+            this.label16.Text = "Tên thí sinh";
+            // 
+            // textBoxIdRegister
+            // 
+            this.textBoxIdRegister.Location = new System.Drawing.Point(231, 87);
+            this.textBoxIdRegister.Name = "textBoxIdRegister";
+            this.textBoxIdRegister.Size = new System.Drawing.Size(200, 20);
+            this.textBoxIdRegister.TabIndex = 42;
+            this.textBoxIdRegister.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNotChar_KeyPress);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(104, 90);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(16, 13);
+            this.label17.TabIndex = 41;
+            this.label17.Text = "Id";
             // 
             // tabPageCreateRoom
             // 
@@ -912,15 +1268,216 @@ namespace ExamManagerWinform
             this.dataGridViewTeacher.TabIndex = 0;
             this.dataGridViewTeacher.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTeacher_CellClick);
             // 
-            // buttonRefreshStudent
+            // tabPageRegisterList
             // 
-            this.buttonRefreshStudent.Location = new System.Drawing.Point(232, 389);
-            this.buttonRefreshStudent.Name = "buttonRefreshStudent";
-            this.buttonRefreshStudent.Size = new System.Drawing.Size(138, 38);
-            this.buttonRefreshStudent.TabIndex = 41;
-            this.buttonRefreshStudent.Text = "LÀM MỚI DANH SÁCH";
-            this.buttonRefreshStudent.UseVisualStyleBackColor = true;
-            this.buttonRefreshStudent.Click += new System.EventHandler(this.buttonRefreshStudent_Click);
+            this.tabPageRegisterList.Controls.Add(this.btnUpdateRegisterList);
+            this.tabPageRegisterList.Controls.Add(this.labelStatusRegisterList);
+            this.tabPageRegisterList.Controls.Add(this.labelExamIdRegisterList);
+            this.tabPageRegisterList.Controls.Add(this.comboBoxStatusRegisterList);
+            this.tabPageRegisterList.Controls.Add(this.textBoxExamIdRegisterList);
+            this.tabPageRegisterList.Controls.Add(this.labelLevelIdRegisterList);
+            this.tabPageRegisterList.Controls.Add(this.textBoxLevelIdRegisterList);
+            this.tabPageRegisterList.Controls.Add(this.labelStudentIdRegisterList);
+            this.tabPageRegisterList.Controls.Add(this.textBoxStudentIdRegisterList);
+            this.tabPageRegisterList.Controls.Add(this.labelIdRegisterList);
+            this.tabPageRegisterList.Controls.Add(this.textBoxIdRegisterList);
+            this.tabPageRegisterList.Controls.Add(this.dataGridViewRegisterList);
+            this.tabPageRegisterList.Controls.Add(this.panel3);
+            this.tabPageRegisterList.Location = new System.Drawing.Point(4, 22);
+            this.tabPageRegisterList.Name = "tabPageRegisterList";
+            this.tabPageRegisterList.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageRegisterList.Size = new System.Drawing.Size(955, 508);
+            this.tabPageRegisterList.TabIndex = 7;
+            this.tabPageRegisterList.Text = "Danh sách đăng ký";
+            this.tabPageRegisterList.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.label20);
+            this.panel3.Controls.Add(this.btnSearchRegisterList);
+            this.panel3.Controls.Add(this.comboBoxSearchLevelRegisterList);
+            this.panel3.Controls.Add(this.label21);
+            this.panel3.Controls.Add(this.labelCCCDRegisterList);
+            this.panel3.Controls.Add(this.textBoxSearchCCCDRegisterList);
+            this.panel3.Controls.Add(this.comboBoxSearchExamRegisterList);
+            this.panel3.Location = new System.Drawing.Point(92, 6);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(733, 38);
+            this.panel3.TabIndex = 65;
+            // 
+            // btnSearchRegisterList
+            // 
+            this.btnSearchRegisterList.Location = new System.Drawing.Point(643, 7);
+            this.btnSearchRegisterList.Name = "btnSearchRegisterList";
+            this.btnSearchRegisterList.Size = new System.Drawing.Size(75, 23);
+            this.btnSearchRegisterList.TabIndex = 45;
+            this.btnSearchRegisterList.Text = "Tìm kiếm";
+            this.btnSearchRegisterList.UseVisualStyleBackColor = true;
+            this.btnSearchRegisterList.Click += new System.EventHandler(this.btnSearchRegisterList_Click);
+            // 
+            // labelCCCDRegisterList
+            // 
+            this.labelCCCDRegisterList.AutoSize = true;
+            this.labelCCCDRegisterList.Location = new System.Drawing.Point(12, 12);
+            this.labelCCCDRegisterList.Name = "labelCCCDRegisterList";
+            this.labelCCCDRegisterList.Size = new System.Drawing.Size(39, 13);
+            this.labelCCCDRegisterList.TabIndex = 44;
+            this.labelCCCDRegisterList.Text = "CCCD:";
+            // 
+            // textBoxSearchCCCDRegisterList
+            // 
+            this.textBoxSearchCCCDRegisterList.Location = new System.Drawing.Point(66, 8);
+            this.textBoxSearchCCCDRegisterList.Name = "textBoxSearchCCCDRegisterList";
+            this.textBoxSearchCCCDRegisterList.Size = new System.Drawing.Size(133, 20);
+            this.textBoxSearchCCCDRegisterList.TabIndex = 43;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(438, 10);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(50, 13);
+            this.label20.TabIndex = 69;
+            this.label20.Text = "Trình độ:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(216, 12);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(49, 13);
+            this.label21.TabIndex = 68;
+            this.label21.Text = "Khóa thi:";
+            // 
+            // comboBoxSearchLevelRegisterList
+            // 
+            this.comboBoxSearchLevelRegisterList.FormattingEnabled = true;
+            this.comboBoxSearchLevelRegisterList.Location = new System.Drawing.Point(498, 7);
+            this.comboBoxSearchLevelRegisterList.Name = "comboBoxSearchLevelRegisterList";
+            this.comboBoxSearchLevelRegisterList.Size = new System.Drawing.Size(133, 21);
+            this.comboBoxSearchLevelRegisterList.TabIndex = 67;
+            this.comboBoxSearchLevelRegisterList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNotChar_KeyPress);
+            // 
+            // comboBoxSearchExamRegisterList
+            // 
+            this.comboBoxSearchExamRegisterList.FormattingEnabled = true;
+            this.comboBoxSearchExamRegisterList.Location = new System.Drawing.Point(280, 8);
+            this.comboBoxSearchExamRegisterList.Name = "comboBoxSearchExamRegisterList";
+            this.comboBoxSearchExamRegisterList.Size = new System.Drawing.Size(133, 21);
+            this.comboBoxSearchExamRegisterList.TabIndex = 66;
+            this.comboBoxSearchExamRegisterList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNotChar_KeyPress);
+            // 
+            // dataGridViewRegisterList
+            // 
+            this.dataGridViewRegisterList.AllowUserToAddRows = false;
+            this.dataGridViewRegisterList.AllowUserToDeleteRows = false;
+            this.dataGridViewRegisterList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewRegisterList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRegisterList.Location = new System.Drawing.Point(3, 63);
+            this.dataGridViewRegisterList.Name = "dataGridViewRegisterList";
+            this.dataGridViewRegisterList.Size = new System.Drawing.Size(547, 442);
+            this.dataGridViewRegisterList.TabIndex = 66;
+            this.dataGridViewRegisterList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRegisterList_CellClick);
+            // 
+            // labelIdRegisterList
+            // 
+            this.labelIdRegisterList.AutoSize = true;
+            this.labelIdRegisterList.Location = new System.Drawing.Point(616, 92);
+            this.labelIdRegisterList.Name = "labelIdRegisterList";
+            this.labelIdRegisterList.Size = new System.Drawing.Size(16, 13);
+            this.labelIdRegisterList.TabIndex = 68;
+            this.labelIdRegisterList.Text = "Id";
+            // 
+            // textBoxIdRegisterList
+            // 
+            this.textBoxIdRegisterList.Enabled = false;
+            this.textBoxIdRegisterList.Location = new System.Drawing.Point(726, 89);
+            this.textBoxIdRegisterList.Name = "textBoxIdRegisterList";
+            this.textBoxIdRegisterList.Size = new System.Drawing.Size(177, 20);
+            this.textBoxIdRegisterList.TabIndex = 67;
+            // 
+            // labelStudentIdRegisterList
+            // 
+            this.labelStudentIdRegisterList.AutoSize = true;
+            this.labelStudentIdRegisterList.Location = new System.Drawing.Point(617, 140);
+            this.labelStudentIdRegisterList.Name = "labelStudentIdRegisterList";
+            this.labelStudentIdRegisterList.Size = new System.Drawing.Size(60, 13);
+            this.labelStudentIdRegisterList.TabIndex = 70;
+            this.labelStudentIdRegisterList.Text = "Mã thí sinh";
+            // 
+            // textBoxStudentIdRegisterList
+            // 
+            this.textBoxStudentIdRegisterList.Location = new System.Drawing.Point(726, 137);
+            this.textBoxStudentIdRegisterList.Name = "textBoxStudentIdRegisterList";
+            this.textBoxStudentIdRegisterList.Size = new System.Drawing.Size(177, 20);
+            this.textBoxStudentIdRegisterList.TabIndex = 69;
+            this.textBoxStudentIdRegisterList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNotChar_KeyPress);
+            // 
+            // labelLevelIdRegisterList
+            // 
+            this.labelLevelIdRegisterList.AutoSize = true;
+            this.labelLevelIdRegisterList.Location = new System.Drawing.Point(616, 226);
+            this.labelLevelIdRegisterList.Name = "labelLevelIdRegisterList";
+            this.labelLevelIdRegisterList.Size = new System.Drawing.Size(61, 13);
+            this.labelLevelIdRegisterList.TabIndex = 72;
+            this.labelLevelIdRegisterList.Text = "Mã trình độ";
+            // 
+            // textBoxLevelIdRegisterList
+            // 
+            this.textBoxLevelIdRegisterList.Location = new System.Drawing.Point(726, 226);
+            this.textBoxLevelIdRegisterList.Name = "textBoxLevelIdRegisterList";
+            this.textBoxLevelIdRegisterList.Size = new System.Drawing.Size(177, 20);
+            this.textBoxLevelIdRegisterList.TabIndex = 71;
+            this.textBoxLevelIdRegisterList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNotChar_KeyPress);
+            // 
+            // labelExamIdRegisterList
+            // 
+            this.labelExamIdRegisterList.AutoSize = true;
+            this.labelExamIdRegisterList.Location = new System.Drawing.Point(616, 185);
+            this.labelExamIdRegisterList.Name = "labelExamIdRegisterList";
+            this.labelExamIdRegisterList.Size = new System.Drawing.Size(63, 13);
+            this.labelExamIdRegisterList.TabIndex = 74;
+            this.labelExamIdRegisterList.Text = "Mã khóa thi";
+            // 
+            // textBoxExamIdRegisterList
+            // 
+            this.textBoxExamIdRegisterList.Location = new System.Drawing.Point(726, 182);
+            this.textBoxExamIdRegisterList.Name = "textBoxExamIdRegisterList";
+            this.textBoxExamIdRegisterList.Size = new System.Drawing.Size(177, 20);
+            this.textBoxExamIdRegisterList.TabIndex = 73;
+            this.textBoxExamIdRegisterList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNotChar_KeyPress);
+            // 
+            // labelStatusRegisterList
+            // 
+            this.labelStatusRegisterList.AutoSize = true;
+            this.labelStatusRegisterList.Location = new System.Drawing.Point(616, 274);
+            this.labelStatusRegisterList.Name = "labelStatusRegisterList";
+            this.labelStatusRegisterList.Size = new System.Drawing.Size(58, 13);
+            this.labelStatusRegisterList.TabIndex = 71;
+            this.labelStatusRegisterList.Text = "Trạng thái ";
+            // 
+            // comboBoxStatusRegisterList
+            // 
+            this.comboBoxStatusRegisterList.FormattingEnabled = true;
+            this.comboBoxStatusRegisterList.Items.AddRange(new object[] {
+            "Chưa đóng lệ phí",
+            "Đã đóng lệ phí"});
+            this.comboBoxStatusRegisterList.Location = new System.Drawing.Point(726, 271);
+            this.comboBoxStatusRegisterList.Name = "comboBoxStatusRegisterList";
+            this.comboBoxStatusRegisterList.Size = new System.Drawing.Size(177, 21);
+            this.comboBoxStatusRegisterList.TabIndex = 70;
+            this.comboBoxStatusRegisterList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNotChar_KeyPress);
+            // 
+            // btnUpdateRegisterList
+            // 
+            this.btnUpdateRegisterList.Location = new System.Drawing.Point(726, 330);
+            this.btnUpdateRegisterList.Name = "btnUpdateRegisterList";
+            this.btnUpdateRegisterList.Size = new System.Drawing.Size(125, 38);
+            this.btnUpdateRegisterList.TabIndex = 75;
+            this.btnUpdateRegisterList.Text = "SỬA";
+            this.btnUpdateRegisterList.UseVisualStyleBackColor = true;
+            this.btnUpdateRegisterList.Click += new System.EventHandler(this.btnUpdateRegisterList_Click);
             // 
             // MainForm
             // 
@@ -944,6 +1501,10 @@ namespace ExamManagerWinform
             this.panelSearchWithInfo.PerformLayout();
             this.panelSearchWithRoom.ResumeLayout(false);
             this.panelSearchWithRoom.PerformLayout();
+            this.tabPageRegister.ResumeLayout(false);
+            this.tabPageRegister.PerformLayout();
+            this.panelControlRegister.ResumeLayout(false);
+            this.panelControlRegister.PerformLayout();
             this.tabPageExam.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -955,6 +1516,11 @@ namespace ExamManagerWinform
             this.tabPageTeacher.ResumeLayout(false);
             this.tabPageTeacher.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTeacher)).EndInit();
+            this.tabPageRegisterList.ResumeLayout(false);
+            this.tabPageRegisterList.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRegisterList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1039,5 +1605,55 @@ namespace ExamManagerWinform
         private System.Windows.Forms.TextBox textBoxEmailStudent;
         private System.Windows.Forms.Label labelEmailStudent;
         private System.Windows.Forms.Button buttonRefreshStudent;
+        private System.Windows.Forms.TextBox textBoxEmailRegister;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxIssuePLaceRegister;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DateTimePicker dateTimePickerIssueRegister;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBoxCCCDRegister;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.DateTimePicker dateTimePickerBornRegister;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.RadioButton radioBtnNuRegister;
+        private System.Windows.Forms.RadioButton radioBtnNamRegister;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBoxPhoneRegister;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBoxNameRegister;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBoxIdRegister;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox comboBoxLevelRegister;
+        private System.Windows.Forms.ComboBox comboBoxExamRegister;
+        private System.Windows.Forms.Panel panelControlRegister;
+        private System.Windows.Forms.Button btnSearchCCCDRegister;
+        private System.Windows.Forms.Label labelSearchCCCDRegister;
+        private System.Windows.Forms.TextBox textBoxSearchCCCDRegister;
+        private System.Windows.Forms.Button btnCancelRegister;
+        private System.Windows.Forms.Button btnSubmitRegister;
+        private System.Windows.Forms.TabPage tabPageRegisterList;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button btnSearchRegisterList;
+        private System.Windows.Forms.ComboBox comboBoxSearchLevelRegisterList;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label labelCCCDRegisterList;
+        private System.Windows.Forms.TextBox textBoxSearchCCCDRegisterList;
+        private System.Windows.Forms.ComboBox comboBoxSearchExamRegisterList;
+        private System.Windows.Forms.DataGridView dataGridViewRegisterList;
+        private System.Windows.Forms.Button btnUpdateRegisterList;
+        private System.Windows.Forms.Label labelStatusRegisterList;
+        private System.Windows.Forms.Label labelExamIdRegisterList;
+        private System.Windows.Forms.ComboBox comboBoxStatusRegisterList;
+        private System.Windows.Forms.TextBox textBoxExamIdRegisterList;
+        private System.Windows.Forms.Label labelLevelIdRegisterList;
+        private System.Windows.Forms.TextBox textBoxLevelIdRegisterList;
+        private System.Windows.Forms.Label labelStudentIdRegisterList;
+        private System.Windows.Forms.TextBox textBoxStudentIdRegisterList;
+        private System.Windows.Forms.Label labelIdRegisterList;
+        private System.Windows.Forms.TextBox textBoxIdRegisterList;
     }
 }

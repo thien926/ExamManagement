@@ -1,4 +1,5 @@
-﻿using ExamManagerWinform.DTOs;
+﻿using System.Collections;
+using ExamManagerWinform.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,6 +13,7 @@ namespace ExamManagerWinform.DAOs
     class ExaminationDAO
     {
         private static ExaminationDAO instance;
+        private string connectSTR = "Data Source=.\\SQLEXPRESS; Initial Catalog=EXAMDB;Integrated Security=true; uid=sa; password=1234567890";
         internal static ExaminationDAO Instance { get => (instance == null) ? (instance = new ExaminationDAO()) : instance; private set => instance = value; }
 
         private ExaminationDAO() { }
@@ -45,6 +47,34 @@ namespace ExamManagerWinform.DAOs
             int res = DataProvider.Instance.ExcuteNonQuery(query);
 
             return res > 0;
+        }
+
+        public string[] getAllForRegister()
+        {
+            string query = "select [Id], [name] from Examinations";
+
+            List<string> data = new List<string>();
+
+            using (SqlConnection connection = new SqlConnection(connectSTR))
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                var reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    // Đọc từng dòng tập kết quả
+                    while (reader.Read())
+                    {
+                        data.Add(reader.GetInt32(0) + "-" + reader.GetString(1));
+                    }
+                }
+
+                connection.Close();
+            }
+
+            return data.ToArray<string>();
         }
     }
 }

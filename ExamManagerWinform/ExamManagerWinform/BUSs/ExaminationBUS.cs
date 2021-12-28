@@ -39,5 +39,9 @@ namespace ExamManagerWinform.BUSs
         {
             return ExaminationDAO.Instance.DeleteExamination(Id);
         }
+
+        public string[] getAllForRegister() {
+            return ExaminationDAO.Instance.getAllForRegister();
+        }
     }
 }

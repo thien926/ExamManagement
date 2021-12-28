@@ -51,5 +51,13 @@ namespace ExamManagerWinform.BUSs
         {
             return StudentDAO.Instance.DeleteStudent(Id);
         }
+
+        public StudentDTO getStudent(int Id) {
+            return StudentDAO.Instance.getStudent(Id);
+        }
+
+        public StudentDTO getStudentWithCCCD(string CCCD) {
+            return StudentDAO.Instance.getStudentWithCCCD(CCCD);
+        }
     }
 }

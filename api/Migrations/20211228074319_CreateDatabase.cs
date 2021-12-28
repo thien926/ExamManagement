@@ -188,9 +188,10 @@ namespace api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_RegistionForms_examinationId",
+                name: "IX_RegistionForms_examinationId_levelId_studentId",
                 table: "RegistionForms",
-                column: "examinationId");
+                columns: new[] { "examinationId", "levelId", "studentId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_RegistionForms_levelId",
