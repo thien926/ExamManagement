@@ -1,4 +1,5 @@
 ﻿using ExamManagerWinform.BUSs;
+using ExamManagerWinform.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,20 @@ namespace ExamManagerWinform
             getTeacherList();
             getStudentList();
             LoadComponentRegister();
+
+            for(int i = 0; i < 30; ++i)
+            {
+                ViewRoom cc = new ViewRoom();
+                
+                if(i % 3 == 0)
+                {
+                    cc.teacherIdOne = 1;
+                    cc.teacherIdTwo = 2;
+                }
+
+                cc.initial("A2001\n35 Thí sinh\nChưa có người coi thi");
+                flowLayoutPanelListRoom.Controls.Add(cc);
+            }
         }
 
         #region Method LoadData Init
@@ -985,8 +1000,7 @@ namespace ExamManagerWinform
             }
         }
 
-        #endregion
 
-        
+        #endregion
     }
 }

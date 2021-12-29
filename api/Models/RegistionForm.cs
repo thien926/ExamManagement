@@ -16,5 +16,6 @@ namespace api.Models
         public virtual Examination examination { get; set; }
         public virtual Level level { get; set; }
         public virtual Student student { get; set; }
+        public virtual Result result { get; set; }
     }
 }

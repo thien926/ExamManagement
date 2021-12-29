@@ -80,6 +80,11 @@ namespace api.Repositories
                     .WithMany(m => m.RegistionForms)
                     .HasForeignKey(o => o.levelId)
                     .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne<Result>(o => o.result)
+                    .WithOne(m => m.registionForm)
+                    .HasForeignKey<Result>(m => m.registionFormId)
+                    .OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<Room>(entity => {
@@ -120,10 +125,10 @@ namespace api.Repositories
                     .HasForeignKey(o => o.roomId)
                     .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasOne<Student>(o => o.student)
-                    .WithMany(m => m.Results)
-                    .HasForeignKey(o => o.studentId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                // entity.HasOne<Student>(o => o.student)
+                //     .WithMany(m => m.Results)
+                //     .HasForeignKey(o => o.studentId)
+                //     .OnDelete(DeleteBehavior.Cascade);
             });
 
             base.OnModelCreating(modelBuilder);

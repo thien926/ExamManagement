@@ -18,7 +18,9 @@ namespace api.Models
         public int studentId { get; set; }
         
 
+        public int registionFormId { get; set; }
         public virtual Room room { get; set; }
-        public virtual Student student { get; set; }
+        // public virtual Student student { get; set; }
+        public virtual RegistionForm registionForm { get; set; }
     }
 }

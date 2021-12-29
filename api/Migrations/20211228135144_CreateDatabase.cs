@@ -132,38 +132,6 @@ namespace api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Results",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    examRoom = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
-                    SBD = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
-                    pointListen = table.Column<float>(type: "real", nullable: false),
-                    pointSpeak = table.Column<float>(type: "real", nullable: false),
-                    pointWrite = table.Column<float>(type: "real", nullable: false),
-                    pointRead = table.Column<float>(type: "real", nullable: false),
-                    roomId = table.Column<int>(type: "int", nullable: false),
-                    studentId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Results", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Results_Rooms_roomId",
-                        column: x => x.roomId,
-                        principalTable: "Rooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Results_Students_studentId",
-                        column: x => x.studentId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Watchers",
                 columns: table => new
                 {
@@ -187,6 +155,38 @@ namespace api.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Results",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    examRoom = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
+                    SBD = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
+                    pointListen = table.Column<float>(type: "real", nullable: false),
+                    pointSpeak = table.Column<float>(type: "real", nullable: false),
+                    pointWrite = table.Column<float>(type: "real", nullable: false),
+                    pointRead = table.Column<float>(type: "real", nullable: false),
+                    roomId = table.Column<int>(type: "int", nullable: false),
+                    studentId = table.Column<int>(type: "int", nullable: false),
+                    registionFormId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Results", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Results_RegistionForms_registionFormId",
+                        column: x => x.registionFormId,
+                        principalTable: "RegistionForms",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Results_Rooms_roomId",
+                        column: x => x.roomId,
+                        principalTable: "Rooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_RegistionForms_examinationId_levelId_studentId",
                 table: "RegistionForms",
@@ -204,14 +204,15 @@ namespace api.Migrations
                 column: "studentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Results_registionFormId",
+                table: "Results",
+                column: "registionFormId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Results_roomId",
                 table: "Results",
                 column: "roomId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Results_studentId",
-                table: "Results",
-                column: "studentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rooms_examinationId",
@@ -233,22 +234,22 @@ namespace api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RegistionForms");
-
-            migrationBuilder.DropTable(
                 name: "Results");
 
             migrationBuilder.DropTable(
                 name: "Watchers");
 
             migrationBuilder.DropTable(
-                name: "Students");
+                name: "RegistionForms");
 
             migrationBuilder.DropTable(
                 name: "Rooms");
 
             migrationBuilder.DropTable(
                 name: "Teachers");
+
+            migrationBuilder.DropTable(
+                name: "Students");
 
             migrationBuilder.DropTable(
                 name: "Examinations");

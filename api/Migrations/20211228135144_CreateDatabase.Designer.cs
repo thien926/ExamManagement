@@ -10,7 +10,7 @@ using api.Repositories;
 namespace api.Migrations
 {
     [DbContext(typeof(ExamDBContext))]
-    [Migration("20211228074319_CreateDatabase")]
+    [Migration("20211228135144_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,6 +118,9 @@ namespace api.Migrations
                     b.Property<float>("pointWrite")
                         .HasColumnType("real");
 
+                    b.Property<int>("registionFormId")
+                        .HasColumnType("int");
+
                     b.Property<int>("roomId")
                         .HasColumnType("int");
 
@@ -126,9 +129,10 @@ namespace api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("roomId");
+                    b.HasIndex("registionFormId")
+                        .IsUnique();
 
-                    b.HasIndex("studentId");
+                    b.HasIndex("roomId");
 
                     b.ToTable("Results");
                 });
@@ -282,21 +286,21 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Models.Result", b =>
                 {
+                    b.HasOne("api.Models.RegistionForm", "registionForm")
+                        .WithOne("result")
+                        .HasForeignKey("api.Models.Result", "registionFormId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("api.Models.Room", "room")
                         .WithMany("Results")
                         .HasForeignKey("roomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("api.Models.Student", "student")
-                        .WithMany("Results")
-                        .HasForeignKey("studentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("registionForm");
 
                     b.Navigation("room");
-
-                    b.Navigation("student");
                 });
 
             modelBuilder.Entity("api.Models.Room", b =>
@@ -351,6 +355,11 @@ namespace api.Migrations
                     b.Navigation("Rooms");
                 });
 
+            modelBuilder.Entity("api.Models.RegistionForm", b =>
+                {
+                    b.Navigation("result");
+                });
+
             modelBuilder.Entity("api.Models.Room", b =>
                 {
                     b.Navigation("Results");
@@ -361,8 +370,6 @@ namespace api.Migrations
             modelBuilder.Entity("api.Models.Student", b =>
                 {
                     b.Navigation("RegistionForms");
-
-                    b.Navigation("Results");
                 });
 
             modelBuilder.Entity("api.Models.Teacher", b =>
