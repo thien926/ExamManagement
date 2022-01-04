@@ -1,4 +1,6 @@
 ﻿using ExamManagerWinform.BUSs;
+using ExamManagerWinform.DTOs;
+using ExamManagerWinform.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,20 +18,28 @@ namespace ExamManagerWinform
     {
         private ExaminationBUS examinationBUS = new ExaminationBUS();
         private LevelBUS levelBUS = new LevelBUS();
-        private TeacherBUS teacherBUS = new TeacherBUS();
         private StudentBUS studentBUS = new StudentBUS();
         private RegistionFormBUS registionFormBUS = new RegistionFormBUS();
+        private RoomBUS roomBUS = new RoomBUS();
+        private ResultBUS resultBUS = new ResultBUS();
+
+        private int IdExaminationCreateRoom = -1, IdLevelCreateRoom = -1;
+        private int IdRoomInputPoint = -1;
         public MainForm()
         {
             InitializeComponent();
-            getExamList();
-            getLevelList();
-            getTeacherList();
-            getStudentList();
-            LoadComponentRegister();
+            LoadStudent();
+            
         }
 
         #region Method LoadData Init
+        private void LoadStudent()
+        {
+            getStudentList();
+            var comboboxExam = examinationBUS.getAllForRegister();
+            comboBoxListExamStudent.Items.Clear();
+            comboBoxListExamStudent.Items.AddRange(comboboxExam);
+        }
         private void getExamList()
         {
             dataGridViewExam.DataSource = examinationBUS.GetAll();
@@ -38,11 +48,6 @@ namespace ExamManagerWinform
         private void getLevelList()
         {
             dataGridViewLevel.DataSource = levelBUS.GetAll();
-        }
-
-        private void getTeacherList()
-        {
-            dataGridViewTeacher.DataSource = teacherBUS.GetAll();
         }
 
         private void getStudentList()
@@ -61,6 +66,17 @@ namespace ExamManagerWinform
             comboBoxLevelRegister.Items.AddRange(comboboxLevel);
         }
 
+        private void LoadComponentCreateRoom()
+        {
+            var comboboxExam = examinationBUS.getAllForRegister();
+            var comboboxLevel = levelBUS.getAllForRegister();
+
+            comboBoxExamCreateRoom.Items.Clear();
+            comboBoxExamCreateRoom.Items.AddRange(comboboxExam);
+            comboBoxLevelCreateRoom.Items.Clear();
+            comboBoxLevelCreateRoom.Items.AddRange(comboboxLevel);
+        }
+
         private void LoadComponentRegisterList()
         {
             var comboboxExam = examinationBUS.getAllForRegister();
@@ -72,6 +88,28 @@ namespace ExamManagerWinform
             comboBoxSearchLevelRegisterList.Items.AddRange(comboboxLevel);
         }
 
+        private void LoadComponentSortRoom()
+        {
+            var comboboxExam = examinationBUS.getAllForRegister();
+            var comboboxLevel = levelBUS.getAllForRegister();
+
+            comboBoxExamIdSortRoom.Items.Clear();
+            comboBoxExamIdSortRoom.Items.AddRange(comboboxExam);
+            comboBoxLevelSortRoom.Items.Clear();
+            comboBoxLevelSortRoom.Items.AddRange(comboboxLevel);
+        }
+
+        private void LoadComponentInputPoint()
+        {
+            var comboboxExam = examinationBUS.getAllForRegister();
+            var comboboxLevel = levelBUS.getAllForRegister();
+
+            comboBoxListExamInputPoint.Items.Clear();
+            comboBoxListExamInputPoint.Items.AddRange(comboboxExam);
+            comboBoxListLevelInputPoint.Items.Clear();
+            comboBoxListLevelInputPoint.Items.AddRange(comboboxLevel);
+        }
+
         #endregion
 
         #region Event TabControl
@@ -80,10 +118,16 @@ namespace ExamManagerWinform
             switch (tabControl.SelectedIndex)
             {
                 case 0:
-                    getStudentList();
+                    LoadStudent();
                     break;
                 case 1:
                     LoadComponentRegister();
+                    break;
+                case 2:
+                    LoadComponentCreateRoom();
+                    break;
+                case 3:
+                    LoadComponentInputPoint();
                     break;
                 case 4:
                     getExamList();
@@ -92,10 +136,10 @@ namespace ExamManagerWinform
                     getLevelList();
                     break;
                 case 6:
-                    getTeacherList();
+                    LoadComponentRegisterList();
                     break;
                 case 7:
-                    LoadComponentRegisterList();
+                    LoadComponentSortRoom();
                     break;
                 default:
                     break;
@@ -108,6 +152,14 @@ namespace ExamManagerWinform
         private void textBoxNotChar_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void textBoxNotNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((e.KeyChar >= '0') && (e.KeyChar <= '9') || (e.KeyChar == (char)Keys.Back)) == false)
+            {
+                e.Handled = true;
+            }
         }
         #endregion
 
@@ -241,218 +293,6 @@ namespace ExamManagerWinform
 
         #endregion
 
-        #region Events Teachers
-        private void btnAddTeacher_Click(object sender, EventArgs e)
-        {
-            string message = "", gender = "", phone = textBoxPhoneTeacher.Text;
-            if (!textBoxIdTeacher.Text.Equals(""))
-            {
-                message += "Trường Id phải là null\n";
-            }
-
-            if (textBoxNameTeacher.Text.Equals(""))
-            {
-                message += "Trường tên giáo viên phải là khác null\n";
-            }
-
-            if (phone.Equals(""))
-            {
-                message += "Trường số điện thoại phải là khác null\n";
-            }
-            else
-            {
-                var temp = Regex.IsMatch(phone, @"^(09|03|07|08|05)+([0-9]{8})$");
-                if(!temp)
-                {
-                    message += "Số điện thoại phải là kí tự số bắt đầu là (09|03|07|08|05) và có 10 kí tự\n";
-                }
-            }
-
-            if(!radioBtnNamTeacher.Checked && !radioBtnNuTeacher.Checked)
-            {
-                message += "Trường giới tính là bắt buộc\n";
-            }
-            else
-            {
-                if(radioBtnNamTeacher.Checked)
-                {
-                    gender = "Nam";
-                }
-                else
-                {
-                    gender = "Nữ";
-                }
-            }
-
-            if (!message.Equals(""))
-            {
-                MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (teacherBUS.AddTeacher(textBoxNameTeacher.Text, gender, phone))
-            {
-                MessageBox.Show("Thêm thành công!", "Thêm giáo viên", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                btnReFreshFormTeacher_Click(sender, e);
-                getTeacherList();
-            }
-            else
-            {
-                MessageBox.Show("Thêm thất bại!", "Thêm giáo viên", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnUpdateTeacher_Click(object sender, EventArgs e)
-        {
-            string message = "", gender = "", phone = textBoxPhoneTeacher.Text;
-            if (textBoxIdTeacher.Text.Equals(""))
-            {
-                message += "Trường Id phải khác null\n";
-            }
-
-            if (textBoxNameTeacher.Text.Equals(""))
-            {
-                message += "Trường tên giáo viên phải là khác null\n";
-            }
-
-            if (phone.Equals(""))
-            {
-                message += "Trường số điện thoại phải là khác null\n";
-            }
-            else
-            {
-                var temp = Regex.IsMatch(phone, @"^(09|03|07|08|05)+([0-9]{8})$");
-                if (!temp)
-                {
-                    message += "Số điện thoại phải là kí tự số bắt đầu là (09|03|07|08|05) và có 10 kí tự\n";
-                }
-            }
-
-            if (!radioBtnNamTeacher.Checked && !radioBtnNuTeacher.Checked)
-            {
-                message += "Trường giới tính là bắt buộc\n";
-            }
-            else
-            {
-                if (radioBtnNamTeacher.Checked)
-                {
-                    gender = "Nam";
-                }
-                else
-                {
-                    gender = "Nữ";
-                }
-            }
-
-            if (!message.Equals(""))
-            {
-                MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (teacherBUS.UpdateTeacher(int.Parse(textBoxIdTeacher.Text) ,textBoxNameTeacher.Text, gender, phone))
-            {
-                MessageBox.Show("Sửa thành công!", "Sửa giáo viên", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                btnReFreshFormTeacher_Click(sender, e);
-                getTeacherList();
-            }
-            else
-            {
-                MessageBox.Show("Sửa thất bại!", "Sửa giáo viên", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnDeleteTeacher_Click(object sender, EventArgs e)
-        {
-            if (textBoxIdTeacher.Text.Equals(""))
-            {
-                MessageBox.Show("Chưa chọn giáo viên cần xóa.\nXóa thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            MessageBoxButtons messageBoxButtons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show("Bạn có chăc muốn xóa giáo viên đã chọn?", "Xóa giáo viên", messageBoxButtons);
-            if(result == DialogResult.Yes)
-            {
-                if(teacherBUS.DeleteTeacher(int.Parse(textBoxIdTeacher.Text)))
-                {
-                    MessageBox.Show("Xóa thành công!", "Xóa giáo viên", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    btnReFreshFormTeacher_Click(sender, e);
-                    getTeacherList();
-                }
-                else
-                {
-                    MessageBox.Show("Xóa thất bại!", "Xóa giáo viên", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void radioBtnNamTeacher_Click(object sender, EventArgs e)
-        {
-            radioBtnNamTeacher.Checked = true;
-            radioBtnNuTeacher.Checked = false;
-        }
-
-        private void radioBtnNuTeacher_Click(object sender, EventArgs e)
-        {
-            radioBtnNamTeacher.Checked = false;
-            radioBtnNuTeacher.Checked = true;
-        }
-
-        private void dataGridViewTeacher_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int index = e.RowIndex;
-            if (index < 0)
-            {
-                return;
-            }
-            DataGridViewRow selectedRow = dataGridViewTeacher.Rows[index];
-
-            string gender = "";
-
-            try
-            {
-                textBoxIdTeacher.Text = selectedRow.Cells[0].Value.ToString();
-                textBoxNameTeacher.Text = selectedRow.Cells[1].Value.ToString();
-                gender = selectedRow.Cells[2].Value.ToString();
-                if(gender.Equals("Nam"))
-                {
-                    radioBtnNamTeacher.Checked = true;
-                    radioBtnNuTeacher.Checked = false;
-                }
-                else
-                {
-                    radioBtnNamTeacher.Checked = false;
-                    radioBtnNuTeacher.Checked = true;
-                }
-                textBoxPhoneTeacher.Text = selectedRow.Cells[3].Value.ToString();
-            }
-            catch (Exception)
-            {
-                textBoxIdTeacher.Text = "";
-                textBoxNameTeacher.Text = "";
-                radioBtnNamTeacher.Checked = false;
-                radioBtnNuTeacher.Checked = false;
-                textBoxPhoneTeacher.Text = "";
-            }
-        }
-
-        private void btnReFreshFormTeacher_Click(object sender, EventArgs e)
-        {
-            textBoxIdTeacher.Text = "";
-            textBoxNameTeacher.Text = "";
-            radioBtnNamTeacher.Checked = false;
-            radioBtnNuTeacher.Checked = false;
-            textBoxPhoneTeacher.Text = "";
-        }
-
-        private void btnReloadTeacher_Click(object sender, EventArgs e)
-        {
-            getTeacherList();
-        }
-
-
-        #endregion
 
         #region Events Student
         private void buttonRefreshStudent_Click(object sender, EventArgs e)
@@ -746,8 +586,53 @@ namespace ExamManagerWinform
             textBoxEmailStudent.Text = "";
         }
 
+        private void comboBoxListExamStudent_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string[] examinationIdArray = comboBoxListExamStudent.Text.Split('-');
+            int examinationId = int.Parse(examinationIdArray[0]);
 
+            var comboboxRoom = roomBUS.getAllForStudent(examinationId);
+            comboBoxListRoomStudent.Items.Clear();
+            comboBoxListRoomStudent.Items.AddRange(comboboxRoom);
+        }
 
+        private void btnSearchExamRoom_Click(object sender, EventArgs e)
+        {
+            string message = "";
+            if (comboBoxListRoomStudent.Text.Equals(""))
+            {
+                message += "Chưa chọn phòng thi\n";
+            }
+
+            if (!message.Equals(""))
+            {
+                MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int examinationId = -1;
+            string[] examinationIdArray = comboBoxListExamStudent.Text.Split('-');
+            examinationId = int.Parse(examinationIdArray[0]);
+
+            dataGridViewStudent.DataSource = resultBUS.GetWithNameRoomAndExaminationId(comboBoxListRoomStudent.Text, examinationId);
+        }
+
+        private void btnSearchInfo_Click(object sender, EventArgs e)
+        {
+            string phone = textBoxPhoneStudentInStudentPage.Text, name = textBoxNameStudentInStudentPage.Text;
+            if (!phone.Equals(""))
+            {
+                var temp = Regex.IsMatch(phone, @"^(09|03|07|08|05)+([0-9]{0,8})$");
+                if (!temp)
+                {
+                    MessageBox.Show("Số điện thoại phải bắt đầu là 09|03|07|08|05!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            dataGridViewStudent.DataSource = resultBUS.GetWithNameAndPhone(name, phone);
+
+        }
 
         #endregion
 
@@ -877,34 +762,49 @@ namespace ExamManagerWinform
         #region Events RegisterList
         private void btnSearchRegisterList_Click(object sender, EventArgs e)
         {
+            string message = "";
             string CCCD = textBoxSearchCCCDRegisterList.Text;
+            string examinationId = comboBoxSearchExamRegisterList.Text;
+            string levelId = comboBoxSearchLevelRegisterList.Text;
+
             if (!CCCD.Equals(""))
             {
                 var temp = Regex.IsMatch(CCCD, @"^([0-9]{12})$");
                 if (!temp)
                 {
-                    dataGridViewRegisterList.DataSource = null;
-                    return;
+                    message += "Căn cước công dân là 12 chữ số!\n";
                 }
             }
 
-            string examinationId = comboBoxSearchExamRegisterList.Text;
+            
             if(examinationId.Equals(""))
             {
-                dataGridViewRegisterList.DataSource = null;
-                return;
+                message += "Chưa chọn khóa thi\n";
             }
-            string[] exams = examinationId.Split('-');
-            examinationId = exams[0];
+            else
+            {
+                string[] exams = examinationId.Split('-');
+                examinationId = exams[0];
+            }
 
-            string levelId = comboBoxSearchLevelRegisterList.Text;
+            
             if (levelId.Equals(""))
             {
+                message += "Chưa chọn trình độ thi\n";
+                
+            }
+            else
+            {
+                string[] level = levelId.Split('-');
+                levelId = level[0];
+            }
+
+            if (!message.Equals(""))
+            {
+                MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 dataGridViewRegisterList.DataSource = null;
                 return;
             }
-            string[] level = levelId.Split('-');
-            levelId = level[0];
 
             dataGridViewRegisterList.DataSource = registionFormBUS.GetWithExamLevel(int.Parse(examinationId), int.Parse(levelId), CCCD);
         }
@@ -985,8 +885,581 @@ namespace ExamManagerWinform
             }
         }
 
+
         #endregion
 
+        #region Event CreateRoom
+        private void btnCreateRoom_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanelListRoom.Controls.Clear();
+
+            string message = "";
+            int examinationId = -1, levelId = -1;
+            string nameLevel = "";
+            if (comboBoxExamCreateRoom.Text.Equals(""))
+            {
+                message += "Chưa chọn khóa thi\n";
+            }
+            else
+            {
+                string[] examinationIdArray = comboBoxExamCreateRoom.Text.Split('-');
+                examinationId = int.Parse(examinationIdArray[0]);
+            }
+
+            if (comboBoxLevelCreateRoom.Text.Equals(""))
+            {
+                message += "Chưa chọn trình độ thi\n";
+            }
+            else
+            {
+                string[] levelIdArray = comboBoxLevelCreateRoom.Text.Split('-');
+                levelId = int.Parse(levelIdArray[0]);
+                nameLevel = levelIdArray[1];
+            }
+
+            if (!message.Equals(""))
+            {
+                MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            bool temp = roomBUS.isCreateRoom(examinationId, levelId);
+            Console.WriteLine(temp);
+
+            if(temp)
+            {
+                MessageBox.Show("Đã tạo danh sách phòng cho khóa thi và trình độ đã chọn!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            IdExaminationCreateRoom = examinationId;
+            IdLevelCreateRoom = levelId;
+
+            int total = registionFormBUS.getCountByExamAndLevelStatusTrue(IdExaminationCreateRoom, IdLevelCreateRoom);
+            
+            if(total == 0) {
+                MessageBox.Show("Không có thí sinh nào đăng ký!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            lblTotalRegisFormCreateRoom.Text = "Tổng số thí sinh: "+ total +" thí sinh";
+            int numberRoom = (int)Math.Ceiling((float)(total * 1.0/ 35));
+            /*Console.WriteLine(total + " " + numberRoom);*/
+
+            for (int index = 1; index <= numberRoom; ++index)
+            {
+                ViewRoom room = new ViewRoom();
+                room.examinationId = IdExaminationCreateRoom;
+                room.levelId = IdLevelCreateRoom;
+
+                if (index == numberRoom)
+                {
+                    room.amount = total - (numberRoom - 1) * 35;
+                }
+                else
+                {
+                    room.amount = 35;
+                }
+
+                if (index < 10)
+                {
+                    room.initial(nameLevel + "P0" + index);
+                }
+                else
+                {
+                    room.initial(nameLevel + "P" + index);
+                }
+
+                room.Click += new System.EventHandler(this.btnRoomCreated_Click);
+
+                flowLayoutPanelListRoom.Controls.Add(room);
+            }
+            lblNumberRoomCreateRoom.Text = "Đã tạo " + flowLayoutPanelListRoom.Controls.Count + " phòng";
+        }
+
+        private void btnUpdateRoomCreateRoom_Click(object sender, EventArgs e)
+        {
+            string txtAmount = textBoxIdRoomCreateRoom.Text, nameRoom = textBoxIdRoomCreateRoom.Text;
+
+            if(nameRoom.Equals(""))
+            {
+                MessageBox.Show("Mã phòng là bắt buộc!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            if(txtAmount.Trim().Equals(""))
+            {
+                MessageBox.Show("Số lượng thí sinh phải là số!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int amount = int.Parse(textBoxAmountCreateRoom.Text);
+
+            if (amount <= 0)
+            {
+                MessageBox.Show("Số lượng thí sinh phải lớn hơn 0!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (amount >= 70)
+            {
+                MessageBox.Show("Số lượng thí sinh phải nhỏ hơn 70!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Boolean temp = false;
+            foreach (ViewRoom s in flowLayoutPanelListRoom.Controls)
+            {
+                if(s.name.Equals(nameRoom))
+                {
+                    s.amount = amount;
+                    s.apterUpdateNameOrAmount();
+                    temp = true;
+                    break;
+                }
+            }
+
+            if(!temp)
+            {
+                MessageBox.Show("Sửa thất bại!", "Sửa phòng thi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Sửa thành công!", "Sửa phòng thi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnRemoveRoomCreateRoom_Click(object sender, EventArgs e)
+        {
+            string nameRoom = textBoxIdRoomCreateRoom.Text;
+
+            if (nameRoom.Equals(""))
+            {
+                MessageBox.Show("Mã phòng là bắt buộc!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Boolean temp = false;
+            foreach (ViewRoom s in flowLayoutPanelListRoom.Controls)
+            {
+                if (s.name.Equals(nameRoom))
+                {
+                    flowLayoutPanelListRoom.Controls.Remove(s);
+                    temp = true;
+                    break;
+                }
+            }
+
+            if (!temp)
+            {
+                MessageBox.Show("Xóa thất bại!", "Xóa phòng thi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                lblNumberRoomCreateRoom.Text = "Đã tạo " + flowLayoutPanelListRoom.Controls.Count + " phòng";
+                MessageBox.Show("Xóa thành công!", "Xóa phòng thi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnSaveCreateRoom_Click(object sender, EventArgs e)
+        {
+            if(IdExaminationCreateRoom < 0 || IdLevelCreateRoom < 0)
+            {
+                MessageBox.Show("Chưa tạo danh sách phòng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Boolean temp = roomBUS.isCreateRoom(IdExaminationCreateRoom, IdLevelCreateRoom);
+
+            if (temp)
+            {
+                MessageBox.Show("Danh sách phòng cho khóa thi có Id = "+ IdExaminationCreateRoom + " và trình độ có Id = "+ IdLevelCreateRoom + " đã có trong Database!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int totalRegis = registionFormBUS.getCountByExamAndLevelStatusTrue(IdExaminationCreateRoom, IdLevelCreateRoom);
+            int total = 0;
+            foreach (ViewRoom s in flowLayoutPanelListRoom.Controls)
+            {
+                total += s.amount;
+            }
+
+            if(total < totalRegis)
+            {
+                MessageBox.Show("Danh sách phòng đã tạo có số lượng thí sinh thấp hơn danh sách đã đăng ký!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            temp = true;
+            foreach (ViewRoom s in flowLayoutPanelListRoom.Controls)
+            {
+                temp = roomBUS.AddRoom(s.name, s.examinationId, s.levelId, s.amount);
+                if(!temp)
+                {
+                    break;
+                }
+            }
+
+            if(temp)
+            {
+                MessageBox.Show("Lưu thành công!", "Lưu danh sách phòng với khóa thi có Id = " + IdExaminationCreateRoom + " và trình độ có Id = " + IdLevelCreateRoom, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                IdExaminationCreateRoom = -1;
+                IdLevelCreateRoom = -1;
+                lblTotalRegisFormCreateRoom.Text = "Tổng số thí sinh: 0 thí sinh";
+                lblNumberRoomCreateRoom.Text = "Đã tạo 0 phòng";
+                flowLayoutPanelListRoom.Controls.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Lưu thất bại!", "Lưu danh sách phòng với khóa thi có Id = " + IdExaminationCreateRoom + " và trình độ có Id = " + IdLevelCreateRoom, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSeeListRoomInDatabase_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanelListRoom.Controls.Clear();
+
+            string message = "";
+            int examinationId = -1, levelId = -1;
+            if (comboBoxExamCreateRoom.Text.Equals(""))
+            {
+                message += "Chưa chọn khóa thi\n";
+            }
+            else
+            {
+                string[] examinationIdArray = comboBoxExamCreateRoom.Text.Split('-');
+                examinationId = int.Parse(examinationIdArray[0]);
+            }
+
+            if (comboBoxLevelCreateRoom.Text.Equals(""))
+            {
+                message += "Chưa chọn trình độ thi\n";
+            }
+            else
+            {
+                string[] levelIdArray = comboBoxLevelCreateRoom.Text.Split('-');
+                levelId = int.Parse(levelIdArray[0]);
+            }
+
+            if (!message.Equals(""))
+            {
+                MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            IEnumerable<RoomDTO> list = roomBUS.getByExamAndLevel(examinationId, levelId);
+            if(list.Count() > 0)
+            {
+                int numberTotal = 0;
+                foreach(RoomDTO item in list)
+                {
+                    ViewRoom room = new ViewRoom();
+                    room.examinationId = item.examinationId;
+                    room.levelId = item.levelId;
+                    room.amount = item.amount;
+
+                    room.initial(item.name);
+                    flowLayoutPanelListRoom.Controls.Add(room);
+                    numberTotal += item.amount;
+                }
+                lblNumberRoomCreateRoom.Text = "Đã tạo " + flowLayoutPanelListRoom.Controls.Count + " phòng";
+                lblTotalRegisFormCreateRoom.Text = "Tổng số thí sinh: "+ numberTotal +" thí sinh";
+            }
+            else
+            {
+                lblNumberRoomCreateRoom.Text = "Đã tạo 0 phòng";
+                lblTotalRegisFormCreateRoom.Text = "Tổng số thí sinh: 0 thí sinh";
+            }
+        }
+
+        private void btnRoomCreated_Click(object sender, EventArgs e)
+        {
+            ViewRoom edit = sender as ViewRoom;
+            textBoxIdRoomCreateRoom.Text = edit.name;
+            textBoxAmountCreateRoom.Text = edit.amount.ToString();
+        }
+
+        #endregion
+
+        #region Event SortRoom
+        private void btnSortRoom_Click(object sender, EventArgs e)
+        {
+            string message = "";
+            int examinationId = -1, levelId = -1;
+            string nameLevel = "";
+            if (comboBoxExamIdSortRoom.Text.Equals(""))
+            {
+                message += "Chưa chọn khóa thi\n";
+            }
+            else
+            {
+                string[] examinationIdArray = comboBoxExamIdSortRoom.Text.Split('-');
+                examinationId = int.Parse(examinationIdArray[0]);
+            }
+
+            if (comboBoxLevelSortRoom.Text.Equals(""))
+            {
+                message += "Chưa chọn trình độ thi\n";
+            }
+            else
+            {
+                string[] levelIdArray = comboBoxLevelSortRoom.Text.Split('-');
+                levelId = int.Parse(levelIdArray[0]);
+                nameLevel = levelIdArray[1];
+            }
+
+            if (!message.Equals(""))
+            {
+                MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            bool temp = resultBUS.CheckSortInResult(examinationId, levelId);
+            if(temp)
+            {
+                MessageBox.Show("Đã sắp xếp thí sinh vào phòng thi cho khóa thi có Id = " + examinationId + ", trình độ có Id = " + levelId, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var listRegis = registionFormBUS.getByExamAndLevelStatusTrue(examinationId, levelId);
+            var listRoom = roomBUS.getByExamAndLevel(examinationId, levelId);
+            int index = 1;
+            temp = true;
+            string SBD = "";
+            foreach (RoomDTO room in listRoom)
+            {
+                int amount = room.amount;
+                for(int i = index; i <= listRegis.Count(); ++i)
+                {
+                    if(i < 10)
+                    {
+                        SBD = nameLevel + "00" + i;
+                    }
+                    else if(i < 100)
+                    {
+                        SBD = nameLevel + "0" + i;
+                    }
+                    else
+                    {
+                        SBD = nameLevel + i;
+                    }
+                    temp = resultBUS.AddResult(room.name, SBD, 0, 0, 0, 0, room.Id, listRegis.ElementAt(i-1).studentId, listRegis.ElementAt(i - 1).Id);
+                    if(!temp)
+                    {
+                        break;
+                    }
+                    ++index;
+                    --amount;
+
+                    if(amount <= 0)
+                    {
+                        break;
+                    }
+                }
+                if(!temp)
+                {
+                    break;
+                }
+            }
+
+            if(temp)
+            {
+                MessageBox.Show("Xếp thành công!", "Xếp thí sinh vào phòng thi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Xếp thất bại!", "Xếp thí sinh vào phòng thi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSeeListRoomSortRoom_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanelListRoomSortRoom.Controls.Clear();
+
+            string message = "";
+            int examinationId = -1, levelId = -1;
+            if (comboBoxExamIdSortRoom.Text.Equals(""))
+            {
+                message += "Chưa chọn khóa thi\n";
+            }
+            else
+            {
+                string[] examinationIdArray = comboBoxExamIdSortRoom.Text.Split('-');
+                examinationId = int.Parse(examinationIdArray[0]);
+            }
+
+            if (comboBoxLevelSortRoom.Text.Equals(""))
+            {
+                message += "Chưa chọn trình độ thi\n";
+            }
+            else
+            {
+                string[] levelIdArray = comboBoxLevelSortRoom.Text.Split('-');
+                levelId = int.Parse(levelIdArray[0]);
+            }
+
+            if (!message.Equals(""))
+            {
+                MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            IEnumerable<RoomDTO> list = roomBUS.getByExamAndLevel(examinationId, levelId);
+            if (list.Count() > 0)
+            {
+                foreach (RoomDTO item in list)
+                {
+                    ViewRoom room = new ViewRoom();
+                    room.Id = item.Id;
+                    room.examinationId = item.examinationId;
+                    room.levelId = item.levelId;
+                    room.amount = item.amount;
+
+                    room.initial(item.name);
+                    room.Click += new System.EventHandler(this.btnGetListStudentWithRoom_Click);
+                    flowLayoutPanelListRoomSortRoom.Controls.Add(room);
+                }
+            }
+        }
+
+        private void btnGetListStudentWithRoom_Click(object sender, EventArgs e)
+        {
+            ViewRoom edit = sender as ViewRoom;
+            dataGridViewListStudentSortRoom.DataSource = resultBUS.GetWithRoomId(edit.Id);
+        }
+
+        #endregion
+
+        #region Event Imput Point
+        private void btnSearchRoomInputPoint_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanelListRoomInputPoint.Controls.Clear();
+
+            string message = "";
+            int examinationId = -1, levelId = -1;
+            if (comboBoxListExamInputPoint.Text.Equals(""))
+            {
+                message += "Chưa chọn khóa thi\n";
+            }
+            else
+            {
+                string[] examinationIdArray = comboBoxListExamInputPoint.Text.Split('-');
+                examinationId = int.Parse(examinationIdArray[0]);
+            }
+
+            if (comboBoxListLevelInputPoint.Text.Equals(""))
+            {
+                message += "Chưa chọn trình độ thi\n";
+            }
+            else
+            {
+                string[] levelIdArray = comboBoxListLevelInputPoint.Text.Split('-');
+                levelId = int.Parse(levelIdArray[0]);
+            }
+
+            if (!message.Equals(""))
+            {
+                MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            IEnumerable<RoomDTO> list = roomBUS.getByExamAndLevel(examinationId, levelId);
+            if (list.Count() > 0)
+            {
+                foreach (RoomDTO item in list)
+                {
+                    ViewRoom room = new ViewRoom();
+                    room.Id = item.Id;
+                    room.examinationId = item.examinationId;
+                    room.levelId = item.levelId;
+                    room.amount = item.amount;
+
+                    room.initial(item.name);
+                    room.Click += new System.EventHandler(this.btnGetListStudentWithRoomInputPoint_Click);
+                    flowLayoutPanelListRoomInputPoint.Controls.Add(room);
+                }
+            }
+        }
+
+        private void btnGetListStudentWithRoomInputPoint_Click(object sender, EventArgs e)
+        {
+            ViewRoom edit = sender as ViewRoom;
+            IdRoomInputPoint = edit.Id;
+            lblListStudentInputPoint.Text = "Danh sách thí sinh theo phòng thi " + edit.name;
+            dataGridViewListStudentInputPoint.DataSource = resultBUS.GetWithRoomId(edit.Id);
+        }
+
+        private void dataGridViewListStudentInputPoint_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+            if (index < 0)
+            {
+                return;
+            }
+            DataGridViewRow selectedRow = dataGridViewListStudentInputPoint.Rows[index];
+
+            try
+            {
+                textBoxIdRoomInputPoint.Text = selectedRow.Cells[9].Value.ToString();
+                textBoxSBDInputPoint.Text = selectedRow.Cells[11].Value.ToString();
+            }
+            catch (Exception)
+            {
+                textBoxIdRoomInputPoint.Text = "";
+                textBoxSBDInputPoint.Text = "";
+            }
+        }
+
+        private void btnInputPoint_Click(object sender, EventArgs e)
+        {
+            string SBD = textBoxSBDInputPoint.Text;
+            string room = textBoxIdRoomInputPoint.Text;
+
+            if(SBD.Equals("") || room.Equals(""))
+            {
+                MessageBox.Show("Số báo danh và Id phòng thi phải là bắt buộc!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int IdRoom = 0;
+            float pointListen = 0;
+            float pointSpeak = 0;
+            float pointWrite = 0;
+            float pointRead = 0;
+
+            try {
+                IdRoom = int.Parse(room);
+                pointListen = float.Parse(textBoxListenPointInputPoint.Text);
+                pointSpeak = float.Parse(textBoxSpeakPointInputPoint.Text);
+                pointWrite = float.Parse(textBoxWritePointInputPoint.Text);
+                pointRead = float.Parse(textBoxReadPointInputPoint.Text);
+            }
+            catch(Exception) {
+                // Console.WriteLine(e.ToString());
+                MessageBox.Show("Điểm thi phải là số thực!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if(resultBUS.UpdatePointResult(IdRoom, SBD, pointListen, pointSpeak, pointWrite, pointRead))
+            {
+                MessageBox.Show("Nhập điểm thành công!", "Nhập điểm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                textBoxIdRoomInputPoint.Text = "";
+                textBoxSBDInputPoint.Text = "";
+                textBoxListenPointInputPoint.Text = "";
+                textBoxSpeakPointInputPoint.Text = "";
+                textBoxWritePointInputPoint.Text = "";
+                textBoxReadPointInputPoint.Text = "";
+                if(IdRoomInputPoint > 0)
+                {
+                    dataGridViewListStudentInputPoint.DataSource = resultBUS.GetWithRoomId(IdRoomInputPoint);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nhập điểm thất bại!", "Nhập điểm", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         
+        #endregion
     }
 }

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace ExamManagerWinform.DTOs
 {
-    class TeacherDTO
+    class RoomDTO
     {
         public int Id { get; set; }
         public string name { get; set; }
-        public string gender { get; set; }
-        public string phone { get; set; }
+        public int examinationId { get; set; }
+        public int levelId { get; set; }
+        public int amount { get; set; }
     }
 }

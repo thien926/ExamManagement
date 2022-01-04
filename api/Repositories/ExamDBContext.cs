@@ -12,7 +12,7 @@ namespace api.Repositories
     {
         public ExamDBContext(DbContextOptions<ExamDBContext> options) : base(options) {}
 
-        public DbSet<Teacher> Teachers { get; set; }
+        // public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Level> Levels { get; set; }
         public DbSet<Examination> Examinations { get; set; }
         public DbSet<Student> Students { get; set; }
@@ -21,13 +21,13 @@ namespace api.Repositories
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             
-            modelBuilder.Entity<Teacher>(entity => {
-                entity.ToTable("Teachers");
-                entity.HasKey(o => o.Id);
-                entity.Property(o => o.name).HasMaxLength(100).IsRequired();
-                entity.Property(o => o.gender).IsRequired().HasMaxLength(3);
-                entity.Property(o => o.phone).HasMaxLength(10).IsRequired();
-            });
+            // modelBuilder.Entity<Teacher>(entity => {
+            //     entity.ToTable("Teachers");
+            //     entity.HasKey(o => o.Id);
+            //     entity.Property(o => o.name).HasMaxLength(100).IsRequired();
+            //     entity.Property(o => o.gender).IsRequired().HasMaxLength(3);
+            //     entity.Property(o => o.phone).HasMaxLength(10).IsRequired();
+            // });
 
             modelBuilder.Entity<Level>(entity =>
             {
@@ -80,6 +80,11 @@ namespace api.Repositories
                     .WithMany(m => m.RegistionForms)
                     .HasForeignKey(o => o.levelId)
                     .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne<Result>(o => o.result)
+                    .WithOne(m => m.registionForm)
+                    .HasForeignKey<Result>(m => m.registionFormId)
+                    .OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<Room>(entity => {
@@ -100,30 +105,30 @@ namespace api.Repositories
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
-            modelBuilder.Entity<Watcher>(entity => {
-                entity.ToTable("Watchers");
-                entity.HasKey(o => new { o.roomId, o.teacherId });
-            });
+            // modelBuilder.Entity<Watcher>(entity => {
+            //     entity.ToTable("Watchers");
+            //     entity.HasKey(o => new { o.roomId, o.teacherId });
+            // });
 
             modelBuilder.Entity<Result>(entity => {
                 entity.ToTable("Results");
                 entity.HasKey(o => o.Id);
                 entity.Property(o => o.examRoom).HasMaxLength(5).IsRequired();
                 entity.Property(o => o.SBD).HasMaxLength(5).IsRequired();
-                entity.Property(o => o.pointListen).IsRequired();
-                entity.Property(o => o.pointRead).IsRequired();
-                entity.Property(o => o.pointSpeak).IsRequired();
-                entity.Property(o => o.pointWrite).IsRequired();
+                // entity.Property(o => o.pointListen).IsRequired();
+                // entity.Property(o => o.pointRead).IsRequired();
+                // entity.Property(o => o.pointSpeak).IsRequired();
+                // entity.Property(o => o.pointWrite).IsRequired();
 
                 entity.HasOne<Room>(o => o.room)
                     .WithMany(m => m.Results)
                     .HasForeignKey(o => o.roomId)
                     .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasOne<Student>(o => o.student)
-                    .WithMany(m => m.Results)
-                    .HasForeignKey(o => o.studentId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                // entity.HasOne<Student>(o => o.student)
+                //     .WithMany(m => m.Results)
+                //     .HasForeignKey(o => o.studentId)
+                //     .OnDelete(DeleteBehavior.Cascade);
             });
 
             base.OnModelCreating(modelBuilder);

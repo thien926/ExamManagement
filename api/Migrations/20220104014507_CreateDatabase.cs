@@ -55,21 +55,6 @@ namespace api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teachers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    gender = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
-                    phone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Teachers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Rooms",
                 columns: table => new
                 {
@@ -139,50 +124,26 @@ namespace api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     examRoom = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
                     SBD = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
-                    pointListen = table.Column<float>(type: "real", nullable: false),
-                    pointSpeak = table.Column<float>(type: "real", nullable: false),
-                    pointWrite = table.Column<float>(type: "real", nullable: false),
-                    pointRead = table.Column<float>(type: "real", nullable: false),
+                    pointListen = table.Column<float>(type: "real", nullable: true),
+                    pointSpeak = table.Column<float>(type: "real", nullable: true),
+                    pointWrite = table.Column<float>(type: "real", nullable: true),
+                    pointRead = table.Column<float>(type: "real", nullable: true),
                     roomId = table.Column<int>(type: "int", nullable: false),
-                    studentId = table.Column<int>(type: "int", nullable: false)
+                    studentId = table.Column<int>(type: "int", nullable: false),
+                    registionFormId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Results", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Results_RegistionForms_registionFormId",
+                        column: x => x.registionFormId,
+                        principalTable: "RegistionForms",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_Results_Rooms_roomId",
                         column: x => x.roomId,
                         principalTable: "Rooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Results_Students_studentId",
-                        column: x => x.studentId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Watchers",
-                columns: table => new
-                {
-                    roomId = table.Column<int>(type: "int", nullable: false),
-                    teacherId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Watchers", x => new { x.roomId, x.teacherId });
-                    table.ForeignKey(
-                        name: "FK_Watchers_Rooms_roomId",
-                        column: x => x.roomId,
-                        principalTable: "Rooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Watchers_Teachers_teacherId",
-                        column: x => x.teacherId,
-                        principalTable: "Teachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -204,14 +165,15 @@ namespace api.Migrations
                 column: "studentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Results_registionFormId",
+                table: "Results",
+                column: "registionFormId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Results_roomId",
                 table: "Results",
                 column: "roomId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Results_studentId",
-                table: "Results",
-                column: "studentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rooms_examinationId",
@@ -223,32 +185,21 @@ namespace api.Migrations
                 table: "Students",
                 column: "citizenCard",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Watchers_teacherId",
-                table: "Watchers",
-                column: "teacherId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RegistionForms");
-
-            migrationBuilder.DropTable(
                 name: "Results");
 
             migrationBuilder.DropTable(
-                name: "Watchers");
-
-            migrationBuilder.DropTable(
-                name: "Students");
+                name: "RegistionForms");
 
             migrationBuilder.DropTable(
                 name: "Rooms");
 
             migrationBuilder.DropTable(
-                name: "Teachers");
+                name: "Students");
 
             migrationBuilder.DropTable(
                 name: "Examinations");

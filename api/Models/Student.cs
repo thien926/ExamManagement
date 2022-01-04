@@ -18,10 +18,10 @@ namespace api.Models
         public string email { get; set; }
 
         public ICollection<RegistionForm> RegistionForms { get; set; }
-        public ICollection<Result> Results { get; set; }
+        // public ICollection<Result> Results { get; set; }
         public Student() {
             RegistionForms = new HashSet<RegistionForm>();
-            Results = new HashSet<Result>();
+            // Results = new HashSet<Result>();
         }
     }
 }

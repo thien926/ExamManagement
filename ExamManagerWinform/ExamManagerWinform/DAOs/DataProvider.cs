@@ -50,6 +50,7 @@ namespace ExamManagerWinform.DAOs
             return data;
         }
 
+        // Trả về số dòng thành công
         public int ExcuteNonQuery(string query, object[] parameter = null)
         {
             int data = 0;
@@ -77,7 +78,8 @@ namespace ExamManagerWinform.DAOs
                 try{
                     data = command.ExecuteNonQuery();
                 }
-                catch(Exception) {
+                catch(Exception e) {
+                    Console.WriteLine(e.ToString());
                     data = -1;
                 }
 
@@ -87,6 +89,7 @@ namespace ExamManagerWinform.DAOs
             return data;
         }
 
+        // Trả về số lượng - count (1 ô trong data)
         public int ExcuteScalar(string query, object[] parameter = null)
         {
             int data = 0;
