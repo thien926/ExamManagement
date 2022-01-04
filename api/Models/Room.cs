@@ -17,10 +17,10 @@ namespace api.Models
 
         public virtual Examination examination { get; set; }
         public virtual Level level { get; set; }
-        public ICollection<Watcher> Watchers { get; set; }
+        // public ICollection<Watcher> Watchers { get; set; }
         public ICollection<Result> Results { get; set; }
         public Room() {
-            Watchers = new HashSet<Watcher>();
+            // Watchers = new HashSet<Watcher>();
             Results = new HashSet<Result>();
         }
     }

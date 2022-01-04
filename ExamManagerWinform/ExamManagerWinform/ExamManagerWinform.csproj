@@ -49,18 +49,21 @@
     <Compile Include="BUSs\ExaminationBUS.cs" />
     <Compile Include="BUSs\LevelBUS.cs" />
     <Compile Include="BUSs\RegistionFormBUS.cs" />
+    <Compile Include="BUSs\ResultBUS.cs" />
+    <Compile Include="BUSs\RoomBUS.cs" />
     <Compile Include="BUSs\StudentBUS.cs" />
-    <Compile Include="BUSs\TeacherBUS.cs" />
     <Compile Include="DAOs\DataProvider.cs" />
     <Compile Include="DAOs\ExaminationDAO.cs" />
     <Compile Include="DAOs\LevelDAO.cs" />
     <Compile Include="DAOs\RegistionFormDAO.cs" />
+    <Compile Include="DAOs\ResultDAO.cs" />
+    <Compile Include="DAOs\RoomDAO.cs" />
     <Compile Include="DAOs\StudentDAO.cs" />
-    <Compile Include="DAOs\TeacherDAO.cs" />
     <Compile Include="DTOs\RegistionFormDTO.cs" />
+    <Compile Include="DTOs\ResultDTO.cs" />
+    <Compile Include="DTOs\RoomDTO.cs" />
     <Compile Include="DTOs\StudentDTO.cs" />
     <Compile Include="DTOs\ExaminationDTO.cs" />
-    <Compile Include="DTOs\TeacherDTO.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +72,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ViewRoom.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
