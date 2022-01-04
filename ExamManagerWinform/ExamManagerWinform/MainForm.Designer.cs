@@ -70,6 +70,30 @@ namespace ExamManagerWinform
             this.dataGridViewExam = new System.Windows.Forms.DataGridView();
             this.btnReLoadExam = new System.Windows.Forms.Button();
             this.tabPageMarkExam = new System.Windows.Forms.TabPage();
+            this.panelActionInputPoint = new System.Windows.Forms.Panel();
+            this.btnInputPoint = new System.Windows.Forms.Button();
+            this.textBoxWritePointInputPoint = new System.Windows.Forms.TextBox();
+            this.lblWritePointInputPoint = new System.Windows.Forms.Label();
+            this.textBoxReadPointInputPoint = new System.Windows.Forms.TextBox();
+            this.lblReadPointInputPoint = new System.Windows.Forms.Label();
+            this.textBoxSpeakPointInputPoint = new System.Windows.Forms.TextBox();
+            this.lblSpeakPointInputPoint = new System.Windows.Forms.Label();
+            this.textBoxListenPointInputPoint = new System.Windows.Forms.TextBox();
+            this.lblListenPointInputPoint = new System.Windows.Forms.Label();
+            this.textBoxSBDInputPoint = new System.Windows.Forms.TextBox();
+            this.lblSBDInputPoint = new System.Windows.Forms.Label();
+            this.textBoxIdRoomInputPoint = new System.Windows.Forms.TextBox();
+            this.lblIdRoomInputPoint = new System.Windows.Forms.Label();
+            this.lblListStudentInputPoint = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dataGridViewListStudentInputPoint = new System.Windows.Forms.DataGridView();
+            this.flowLayoutPanelListRoomInputPoint = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelControlInputPoint = new System.Windows.Forms.Panel();
+            this.btnSearchRoomInputPoint = new System.Windows.Forms.Button();
+            this.comboBoxListLevelInputPoint = new System.Windows.Forms.ComboBox();
+            this.comboBoxListExamInputPoint = new System.Windows.Forms.ComboBox();
+            this.lblListLevelInputPoint = new System.Windows.Forms.Label();
+            this.lblListExamImputPoint = new System.Windows.Forms.Label();
             this.tabPageCreateRoom = new System.Windows.Forms.TabPage();
             this.btnSeeListRoomInDatabase = new System.Windows.Forms.Button();
             this.lblTotalRegisFormCreateRoom = new System.Windows.Forms.Label();
@@ -151,8 +175,8 @@ namespace ExamManagerWinform
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnSearchInfo = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxPhoneStudentInStudentPage = new System.Windows.Forms.TextBox();
+            this.textBoxNameStudentInStudentPage = new System.Windows.Forms.TextBox();
             this.panelSearchWithRoom = new System.Windows.Forms.Panel();
             this.comboBoxListRoomStudent = new System.Windows.Forms.ComboBox();
             this.comboBoxListExamStudent = new System.Windows.Forms.ComboBox();
@@ -182,6 +206,10 @@ namespace ExamManagerWinform
             this.panel1.SuspendLayout();
             this.panelLeftExam.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExam)).BeginInit();
+            this.tabPageMarkExam.SuspendLayout();
+            this.panelActionInputPoint.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListStudentInputPoint)).BeginInit();
+            this.panelControlInputPoint.SuspendLayout();
             this.tabPageCreateRoom.SuspendLayout();
             this.panelUpdateAmountCreateRoom.SuspendLayout();
             this.tabPageRegister.SuspendLayout();
@@ -594,6 +622,12 @@ namespace ExamManagerWinform
             // 
             // tabPageMarkExam
             // 
+            this.tabPageMarkExam.Controls.Add(this.panelActionInputPoint);
+            this.tabPageMarkExam.Controls.Add(this.lblListStudentInputPoint);
+            this.tabPageMarkExam.Controls.Add(this.label7);
+            this.tabPageMarkExam.Controls.Add(this.dataGridViewListStudentInputPoint);
+            this.tabPageMarkExam.Controls.Add(this.flowLayoutPanelListRoomInputPoint);
+            this.tabPageMarkExam.Controls.Add(this.panelControlInputPoint);
             this.tabPageMarkExam.Location = new System.Drawing.Point(4, 22);
             this.tabPageMarkExam.Name = "tabPageMarkExam";
             this.tabPageMarkExam.Padding = new System.Windows.Forms.Padding(3);
@@ -601,6 +635,234 @@ namespace ExamManagerWinform
             this.tabPageMarkExam.TabIndex = 3;
             this.tabPageMarkExam.Text = "Nhập điểm";
             this.tabPageMarkExam.UseVisualStyleBackColor = true;
+            // 
+            // panelActionInputPoint
+            // 
+            this.panelActionInputPoint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelActionInputPoint.Controls.Add(this.btnInputPoint);
+            this.panelActionInputPoint.Controls.Add(this.textBoxWritePointInputPoint);
+            this.panelActionInputPoint.Controls.Add(this.lblWritePointInputPoint);
+            this.panelActionInputPoint.Controls.Add(this.textBoxReadPointInputPoint);
+            this.panelActionInputPoint.Controls.Add(this.lblReadPointInputPoint);
+            this.panelActionInputPoint.Controls.Add(this.textBoxSpeakPointInputPoint);
+            this.panelActionInputPoint.Controls.Add(this.lblSpeakPointInputPoint);
+            this.panelActionInputPoint.Controls.Add(this.textBoxListenPointInputPoint);
+            this.panelActionInputPoint.Controls.Add(this.lblListenPointInputPoint);
+            this.panelActionInputPoint.Controls.Add(this.textBoxSBDInputPoint);
+            this.panelActionInputPoint.Controls.Add(this.lblSBDInputPoint);
+            this.panelActionInputPoint.Controls.Add(this.textBoxIdRoomInputPoint);
+            this.panelActionInputPoint.Controls.Add(this.lblIdRoomInputPoint);
+            this.panelActionInputPoint.Location = new System.Drawing.Point(3, 437);
+            this.panelActionInputPoint.Name = "panelActionInputPoint";
+            this.panelActionInputPoint.Size = new System.Drawing.Size(946, 68);
+            this.panelActionInputPoint.TabIndex = 7;
+            // 
+            // btnInputPoint
+            // 
+            this.btnInputPoint.Location = new System.Drawing.Point(443, 38);
+            this.btnInputPoint.Name = "btnInputPoint";
+            this.btnInputPoint.Size = new System.Drawing.Size(75, 23);
+            this.btnInputPoint.TabIndex = 36;
+            this.btnInputPoint.Text = "Nhập điểm";
+            this.btnInputPoint.UseVisualStyleBackColor = true;
+            this.btnInputPoint.Click += new System.EventHandler(this.btnInputPoint_Click);
+            // 
+            // textBoxWritePointInputPoint
+            // 
+            this.textBoxWritePointInputPoint.Location = new System.Drawing.Point(849, 10);
+            this.textBoxWritePointInputPoint.Name = "textBoxWritePointInputPoint";
+            this.textBoxWritePointInputPoint.Size = new System.Drawing.Size(87, 20);
+            this.textBoxWritePointInputPoint.TabIndex = 35;
+            // 
+            // lblWritePointInputPoint
+            // 
+            this.lblWritePointInputPoint.AutoSize = true;
+            this.lblWritePointInputPoint.Location = new System.Drawing.Point(795, 13);
+            this.lblWritePointInputPoint.Name = "lblWritePointInputPoint";
+            this.lblWritePointInputPoint.Size = new System.Drawing.Size(51, 13);
+            this.lblWritePointInputPoint.TabIndex = 34;
+            this.lblWritePointInputPoint.Text = "Điểm viết";
+            // 
+            // textBoxReadPointInputPoint
+            // 
+            this.textBoxReadPointInputPoint.Location = new System.Drawing.Point(696, 10);
+            this.textBoxReadPointInputPoint.Name = "textBoxReadPointInputPoint";
+            this.textBoxReadPointInputPoint.Size = new System.Drawing.Size(87, 20);
+            this.textBoxReadPointInputPoint.TabIndex = 33;
+            // 
+            // lblReadPointInputPoint
+            // 
+            this.lblReadPointInputPoint.AutoSize = true;
+            this.lblReadPointInputPoint.Location = new System.Drawing.Point(642, 13);
+            this.lblReadPointInputPoint.Name = "lblReadPointInputPoint";
+            this.lblReadPointInputPoint.Size = new System.Drawing.Size(53, 13);
+            this.lblReadPointInputPoint.TabIndex = 32;
+            this.lblReadPointInputPoint.Text = "Điểm đọc";
+            // 
+            // textBoxSpeakPointInputPoint
+            // 
+            this.textBoxSpeakPointInputPoint.Location = new System.Drawing.Point(534, 9);
+            this.textBoxSpeakPointInputPoint.Name = "textBoxSpeakPointInputPoint";
+            this.textBoxSpeakPointInputPoint.Size = new System.Drawing.Size(87, 20);
+            this.textBoxSpeakPointInputPoint.TabIndex = 31;
+            // 
+            // lblSpeakPointInputPoint
+            // 
+            this.lblSpeakPointInputPoint.AutoSize = true;
+            this.lblSpeakPointInputPoint.Location = new System.Drawing.Point(480, 12);
+            this.lblSpeakPointInputPoint.Name = "lblSpeakPointInputPoint";
+            this.lblSpeakPointInputPoint.Size = new System.Drawing.Size(48, 13);
+            this.lblSpeakPointInputPoint.TabIndex = 30;
+            this.lblSpeakPointInputPoint.Text = "Điểm nói";
+            // 
+            // textBoxListenPointInputPoint
+            // 
+            this.textBoxListenPointInputPoint.Location = new System.Drawing.Point(378, 8);
+            this.textBoxListenPointInputPoint.Name = "textBoxListenPointInputPoint";
+            this.textBoxListenPointInputPoint.Size = new System.Drawing.Size(87, 20);
+            this.textBoxListenPointInputPoint.TabIndex = 29;
+            // 
+            // lblListenPointInputPoint
+            // 
+            this.lblListenPointInputPoint.AutoSize = true;
+            this.lblListenPointInputPoint.Location = new System.Drawing.Point(314, 12);
+            this.lblListenPointInputPoint.Name = "lblListenPointInputPoint";
+            this.lblListenPointInputPoint.Size = new System.Drawing.Size(58, 13);
+            this.lblListenPointInputPoint.TabIndex = 28;
+            this.lblListenPointInputPoint.Text = "Điểm nghe";
+            // 
+            // textBoxSBDInputPoint
+            // 
+            this.textBoxSBDInputPoint.Enabled = false;
+            this.textBoxSBDInputPoint.Location = new System.Drawing.Point(212, 8);
+            this.textBoxSBDInputPoint.Name = "textBoxSBDInputPoint";
+            this.textBoxSBDInputPoint.Size = new System.Drawing.Size(87, 20);
+            this.textBoxSBDInputPoint.TabIndex = 27;
+            // 
+            // lblSBDInputPoint
+            // 
+            this.lblSBDInputPoint.AutoSize = true;
+            this.lblSBDInputPoint.Location = new System.Drawing.Point(177, 12);
+            this.lblSBDInputPoint.Name = "lblSBDInputPoint";
+            this.lblSBDInputPoint.Size = new System.Drawing.Size(29, 13);
+            this.lblSBDInputPoint.TabIndex = 26;
+            this.lblSBDInputPoint.Text = "SBD";
+            // 
+            // textBoxIdRoomInputPoint
+            // 
+            this.textBoxIdRoomInputPoint.Enabled = false;
+            this.textBoxIdRoomInputPoint.Location = new System.Drawing.Point(75, 8);
+            this.textBoxIdRoomInputPoint.Name = "textBoxIdRoomInputPoint";
+            this.textBoxIdRoomInputPoint.Size = new System.Drawing.Size(87, 20);
+            this.textBoxIdRoomInputPoint.TabIndex = 25;
+            // 
+            // lblIdRoomInputPoint
+            // 
+            this.lblIdRoomInputPoint.AutoSize = true;
+            this.lblIdRoomInputPoint.Location = new System.Drawing.Point(7, 11);
+            this.lblIdRoomInputPoint.Name = "lblIdRoomInputPoint";
+            this.lblIdRoomInputPoint.Size = new System.Drawing.Size(63, 13);
+            this.lblIdRoomInputPoint.TabIndex = 24;
+            this.lblIdRoomInputPoint.Text = "Id phòng thi";
+            // 
+            // lblListStudentInputPoint
+            // 
+            this.lblListStudentInputPoint.AutoSize = true;
+            this.lblListStudentInputPoint.Location = new System.Drawing.Point(598, 42);
+            this.lblListStudentInputPoint.Name = "lblListStudentInputPoint";
+            this.lblListStudentInputPoint.Size = new System.Drawing.Size(168, 13);
+            this.lblListStudentInputPoint.TabIndex = 6;
+            this.lblListStudentInputPoint.Text = "Danh sách thí sinh theo phòng thi";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(140, 42);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(106, 13);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Danh sách phòng thi";
+            // 
+            // dataGridViewListStudentInputPoint
+            // 
+            this.dataGridViewListStudentInputPoint.AllowUserToAddRows = false;
+            this.dataGridViewListStudentInputPoint.AllowUserToDeleteRows = false;
+            this.dataGridViewListStudentInputPoint.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewListStudentInputPoint.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewListStudentInputPoint.Location = new System.Drawing.Point(418, 60);
+            this.dataGridViewListStudentInputPoint.Name = "dataGridViewListStudentInputPoint";
+            this.dataGridViewListStudentInputPoint.Size = new System.Drawing.Size(531, 371);
+            this.dataGridViewListStudentInputPoint.TabIndex = 4;
+            this.dataGridViewListStudentInputPoint.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewListStudentInputPoint_CellClick);
+            // 
+            // flowLayoutPanelListRoomInputPoint
+            // 
+            this.flowLayoutPanelListRoomInputPoint.AutoScroll = true;
+            this.flowLayoutPanelListRoomInputPoint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanelListRoomInputPoint.Location = new System.Drawing.Point(3, 60);
+            this.flowLayoutPanelListRoomInputPoint.Name = "flowLayoutPanelListRoomInputPoint";
+            this.flowLayoutPanelListRoomInputPoint.Size = new System.Drawing.Size(412, 371);
+            this.flowLayoutPanelListRoomInputPoint.TabIndex = 3;
+            // 
+            // panelControlInputPoint
+            // 
+            this.panelControlInputPoint.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelControlInputPoint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelControlInputPoint.Controls.Add(this.btnSearchRoomInputPoint);
+            this.panelControlInputPoint.Controls.Add(this.comboBoxListLevelInputPoint);
+            this.panelControlInputPoint.Controls.Add(this.comboBoxListExamInputPoint);
+            this.panelControlInputPoint.Controls.Add(this.lblListLevelInputPoint);
+            this.panelControlInputPoint.Controls.Add(this.lblListExamImputPoint);
+            this.panelControlInputPoint.Location = new System.Drawing.Point(3, 2);
+            this.panelControlInputPoint.Name = "panelControlInputPoint";
+            this.panelControlInputPoint.Size = new System.Drawing.Size(946, 35);
+            this.panelControlInputPoint.TabIndex = 2;
+            // 
+            // btnSearchRoomInputPoint
+            // 
+            this.btnSearchRoomInputPoint.Location = new System.Drawing.Point(658, 5);
+            this.btnSearchRoomInputPoint.Name = "btnSearchRoomInputPoint";
+            this.btnSearchRoomInputPoint.Size = new System.Drawing.Size(150, 23);
+            this.btnSearchRoomInputPoint.TabIndex = 63;
+            this.btnSearchRoomInputPoint.Text = "Xem danh sách phòng thi";
+            this.btnSearchRoomInputPoint.UseVisualStyleBackColor = true;
+            this.btnSearchRoomInputPoint.Click += new System.EventHandler(this.btnSearchRoomInputPoint_Click);
+            // 
+            // comboBoxListLevelInputPoint
+            // 
+            this.comboBoxListLevelInputPoint.FormattingEnabled = true;
+            this.comboBoxListLevelInputPoint.Location = new System.Drawing.Point(446, 6);
+            this.comboBoxListLevelInputPoint.Name = "comboBoxListLevelInputPoint";
+            this.comboBoxListLevelInputPoint.Size = new System.Drawing.Size(153, 21);
+            this.comboBoxListLevelInputPoint.TabIndex = 62;
+            // 
+            // comboBoxListExamInputPoint
+            // 
+            this.comboBoxListExamInputPoint.FormattingEnabled = true;
+            this.comboBoxListExamInputPoint.Location = new System.Drawing.Point(162, 5);
+            this.comboBoxListExamInputPoint.Name = "comboBoxListExamInputPoint";
+            this.comboBoxListExamInputPoint.Size = new System.Drawing.Size(153, 21);
+            this.comboBoxListExamInputPoint.TabIndex = 61;
+            // 
+            // lblListLevelInputPoint
+            // 
+            this.lblListLevelInputPoint.AutoSize = true;
+            this.lblListLevelInputPoint.Location = new System.Drawing.Point(370, 10);
+            this.lblListLevelInputPoint.Name = "lblListLevelInputPoint";
+            this.lblListLevelInputPoint.Size = new System.Drawing.Size(50, 13);
+            this.lblListLevelInputPoint.TabIndex = 3;
+            this.lblListLevelInputPoint.Text = "Trình độ:";
+            // 
+            // lblListExamImputPoint
+            // 
+            this.lblListExamImputPoint.AutoSize = true;
+            this.lblListExamImputPoint.Location = new System.Drawing.Point(94, 10);
+            this.lblListExamImputPoint.Name = "lblListExamImputPoint";
+            this.lblListExamImputPoint.Size = new System.Drawing.Size(49, 13);
+            this.lblListExamImputPoint.TabIndex = 1;
+            this.lblListExamImputPoint.Text = "Khóa thi:";
             // 
             // tabPageCreateRoom
             // 
@@ -1384,8 +1646,8 @@ namespace ExamManagerWinform
             this.panelSearchWithInfo.Controls.Add(this.label4);
             this.panelSearchWithInfo.Controls.Add(this.label3);
             this.panelSearchWithInfo.Controls.Add(this.btnSearchInfo);
-            this.panelSearchWithInfo.Controls.Add(this.textBox2);
-            this.panelSearchWithInfo.Controls.Add(this.textBox1);
+            this.panelSearchWithInfo.Controls.Add(this.textBoxPhoneStudentInStudentPage);
+            this.panelSearchWithInfo.Controls.Add(this.textBoxNameStudentInStudentPage);
             this.panelSearchWithInfo.Location = new System.Drawing.Point(465, 3);
             this.panelSearchWithInfo.Name = "panelSearchWithInfo";
             this.panelSearchWithInfo.Size = new System.Drawing.Size(478, 60);
@@ -1417,20 +1679,21 @@ namespace ExamManagerWinform
             this.btnSearchInfo.TabIndex = 3;
             this.btnSearchInfo.Text = "Tìm kiếm";
             this.btnSearchInfo.UseVisualStyleBackColor = true;
+            this.btnSearchInfo.Click += new System.EventHandler(this.btnSearchInfo_Click);
             // 
-            // textBox2
+            // textBoxPhoneStudentInStudentPage
             // 
-            this.textBox2.Location = new System.Drawing.Point(254, 20);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(128, 20);
-            this.textBox2.TabIndex = 2;
+            this.textBoxPhoneStudentInStudentPage.Location = new System.Drawing.Point(254, 20);
+            this.textBoxPhoneStudentInStudentPage.Name = "textBoxPhoneStudentInStudentPage";
+            this.textBoxPhoneStudentInStudentPage.Size = new System.Drawing.Size(128, 20);
+            this.textBoxPhoneStudentInStudentPage.TabIndex = 2;
             // 
-            // textBox1
+            // textBoxNameStudentInStudentPage
             // 
-            this.textBox1.Location = new System.Drawing.Point(41, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(125, 20);
-            this.textBox1.TabIndex = 1;
+            this.textBoxNameStudentInStudentPage.Location = new System.Drawing.Point(41, 19);
+            this.textBoxNameStudentInStudentPage.Name = "textBoxNameStudentInStudentPage";
+            this.textBoxNameStudentInStudentPage.Size = new System.Drawing.Size(125, 20);
+            this.textBoxNameStudentInStudentPage.TabIndex = 1;
             // 
             // panelSearchWithRoom
             // 
@@ -1666,6 +1929,13 @@ namespace ExamManagerWinform
             this.panel1.ResumeLayout(false);
             this.panelLeftExam.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExam)).EndInit();
+            this.tabPageMarkExam.ResumeLayout(false);
+            this.tabPageMarkExam.PerformLayout();
+            this.panelActionInputPoint.ResumeLayout(false);
+            this.panelActionInputPoint.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListStudentInputPoint)).EndInit();
+            this.panelControlInputPoint.ResumeLayout(false);
+            this.panelControlInputPoint.PerformLayout();
             this.tabPageCreateRoom.ResumeLayout(false);
             this.tabPageCreateRoom.PerformLayout();
             this.panelUpdateAmountCreateRoom.ResumeLayout(false);
@@ -1799,8 +2069,8 @@ namespace ExamManagerWinform
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSearchInfo;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxPhoneStudentInStudentPage;
+        private System.Windows.Forms.TextBox textBoxNameStudentInStudentPage;
         private System.Windows.Forms.Panel panelSearchWithRoom;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -1837,5 +2107,29 @@ namespace ExamManagerWinform
         private System.Windows.Forms.DataGridView dataGridViewListStudentSortRoom;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelListRoomSortRoom;
         private System.Windows.Forms.Label lblListStudentSortRoom;
+        private System.Windows.Forms.Panel panelControlInputPoint;
+        private System.Windows.Forms.Button btnSearchRoomInputPoint;
+        private System.Windows.Forms.ComboBox comboBoxListExamInputPoint;
+        private System.Windows.Forms.Label lblListLevelInputPoint;
+        private System.Windows.Forms.Label lblListExamImputPoint;
+        private System.Windows.Forms.ComboBox comboBoxListLevelInputPoint;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelListRoomInputPoint;
+        private System.Windows.Forms.DataGridView dataGridViewListStudentInputPoint;
+        private System.Windows.Forms.Label lblListStudentInputPoint;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel panelActionInputPoint;
+        private System.Windows.Forms.TextBox textBoxSBDInputPoint;
+        private System.Windows.Forms.Label lblSBDInputPoint;
+        private System.Windows.Forms.TextBox textBoxIdRoomInputPoint;
+        private System.Windows.Forms.Label lblIdRoomInputPoint;
+        private System.Windows.Forms.TextBox textBoxListenPointInputPoint;
+        private System.Windows.Forms.Label lblListenPointInputPoint;
+        private System.Windows.Forms.TextBox textBoxSpeakPointInputPoint;
+        private System.Windows.Forms.Label lblSpeakPointInputPoint;
+        private System.Windows.Forms.TextBox textBoxReadPointInputPoint;
+        private System.Windows.Forms.Label lblReadPointInputPoint;
+        private System.Windows.Forms.TextBox textBoxWritePointInputPoint;
+        private System.Windows.Forms.Label lblWritePointInputPoint;
+        private System.Windows.Forms.Button btnInputPoint;
     }
 }

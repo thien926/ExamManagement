@@ -20,16 +20,23 @@ namespace ExamManagerWinform.DAOs
             //     ", s.citizenCard as [CCCD], s.issueDate as [Ngày cấp], s.issuePlace as [Nơi cấp], s.email as [Mail], r.examRoom as [Phòng thi], " +
             //     "r.SBD, r.pointListen FROM Students as s, Results as r WHERE r.studentId = s.Id and r.roomId = {0}";
             string query = string.Format("SELECT s.Id, s.name as [Tên thí sinh], s.gender as [Giới tính], s.phone as [Số điện thoại], s.bornDate as [Ngày sinh]" +
-                ", s.citizenCard as [CCCD], s.issueDate as [Ngày cấp], s.issuePlace as [Nơi cấp], s.email as [Mail], r.examRoom as [Phòng thi], " +
+                ", s.citizenCard as [CCCD], s.issueDate as [Ngày cấp], s.issuePlace as [Nơi cấp], s.email as [Mail], r.roomId as [Id phòng thi], r.examRoom as [Phòng thi], " +
                 "r.SBD, r.pointListen as [Điểm nghe], r.pointSpeak as [Điểm nói], r.pointWrite as [Điểm viết], r.pointRead as [Điểm đọc] FROM Students as s, Results as r WHERE r.studentId = s.Id and r.roomId = {0}", roomId);
             var res = DataProvider.Instance.ExcuteQuery(query);
             return res;
         }
 
-        public DataTable GetWithNameRoomAndExaminationId(string name, int examinationId) {
+        public DataTable GetWithNameAndPhone(string name, string phone) {
+            
+            string query = string.Format("SELECT s.Id, s.name as [Tên thí sinh], s.gender as [Giới tính], s.phone as [Số điện thoại], s.bornDate as [Ngày sinh], s.citizenCard as [CCCD], s.issueDate as [Ngày cấp], s.issuePlace as [Nơi cấp], s.email as [Mail], r.examRoom as [Phòng thi], r.SBD, r.pointListen as [Điểm nghe], r.pointSpeak as [Điểm nói], r.pointWrite as [Điểm viết], r.pointRead as [Điểm đọc] FROM Students as s, Results as r WHERE r.studentId = s.Id and s.name like N'%{0}%' and s.phone like '%{1}%'", name, phone);
+            var res = DataProvider.Instance.ExcuteQuery(query);
+            return res;
+        }
+
+        public DataTable GetWithNameRoomAndExaminationId(string nameRoom, int examinationId) {
             string query = string.Format("SELECT s.Id, s.name as [Tên thí sinh], s.gender as [Giới tính], s.phone as [Số điện thoại], s.bornDate as [Ngày sinh]" +
                 ", s.citizenCard as [CCCD], s.issueDate as [Ngày cấp], s.issuePlace as [Nơi cấp], s.email as [Mail], r.examRoom as [Phòng thi], " +
-                "r.SBD, r.pointListen as [Điểm nghe], r.pointSpeak as [Điểm nói], r.pointWrite as [Điểm viết], r.pointRead as [Điểm đọc] FROM Students as s, Results as r, Rooms as room WHERE r.roomId = room.Id and r.studentId = s.Id and room.name = '{0}' and room.examinationId = {1}", name, examinationId);
+                "r.SBD, r.pointListen as [Điểm nghe], r.pointSpeak as [Điểm nói], r.pointWrite as [Điểm viết], r.pointRead as [Điểm đọc] FROM Students as s, Results as r, Rooms as room WHERE r.roomId = room.Id and r.studentId = s.Id and room.name = '{0}' and room.examinationId = {1}", nameRoom, examinationId);
             var res = DataProvider.Instance.ExcuteQuery(query);
             return res;
         }
@@ -49,6 +56,15 @@ namespace ExamManagerWinform.DAOs
         {
             string query = string.Format("UPDATE [dbo].[Results] SET [examRoom] = '{0}' , [SBD] = '{1}' , [pointListen] = {2} , [pointSpeak] = {3} , [pointWrite] = {4} , [pointRead] = {5} , [roomId] = {6} , [studentId] = {7} , [registionFormId] = {8}  WHERE [Id] = {9} ", 
             data.examRoom, data.SBD, data.pointListen, data.pointSpeak, data.pointWrite, data.pointRead, data.roomId, data.studentId, data.registionFormId, data.Id);
+            int res = DataProvider.Instance.ExcuteNonQuery(query);
+
+            return res > 0;
+        }
+
+        public Boolean UpdatePointResult(ResultDTO data)
+        {
+            string query = string.Format("UPDATE [dbo].[Results] SET [pointListen] = {0} , [pointSpeak] = {1} , [pointWrite] = {2} , [pointRead] = {3}  WHERE [roomId] = {4} and [SBD] = '{5}' ", 
+            data.pointListen, data.pointSpeak, data.pointWrite, data.pointRead, data.roomId, data.SBD);
             int res = DataProvider.Instance.ExcuteNonQuery(query);
 
             return res > 0;

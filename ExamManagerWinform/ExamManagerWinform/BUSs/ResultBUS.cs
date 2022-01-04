@@ -44,6 +44,17 @@ namespace ExamManagerWinform.BUSs
 
         }
 
+        public Boolean UpdatePointResult(int roomId, string SBD, float pointListen, float pointSpeak, float pointWrite, float pointRead) {
+            var data = new ResultDTO();
+            data.SBD = SBD;
+            data.pointListen = pointListen;
+            data.pointSpeak = pointSpeak;
+            data.pointWrite = pointWrite;
+            data.pointRead = pointRead;
+            data.roomId = roomId;
+            return ResultDAO.Instance.UpdatePointResult(data);
+        }
+
         public Boolean CheckSortInResult(int examinationId, int levelId) {
             return ResultDAO.Instance.CheckSortInRoom(examinationId, levelId);
         }
@@ -53,8 +64,12 @@ namespace ExamManagerWinform.BUSs
             return ResultDAO.Instance.GetWithRoomId(roomId);
         }
 
-        public DataTable GetWithNameRoomAndExaminationId(string name, int examinationId) {
-            return ResultDAO.Instance.GetWithNameRoomAndExaminationId(name, examinationId);
+        public DataTable GetWithNameRoomAndExaminationId(string nameRoom, int examinationId) {
+            return ResultDAO.Instance.GetWithNameRoomAndExaminationId(nameRoom, examinationId);
+        }
+
+        public DataTable GetWithNameAndPhone(string name, string phone) {
+            return ResultDAO.Instance.GetWithNameAndPhone(name, phone);
         }
     }
 }
