@@ -104,16 +104,16 @@ namespace api.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
 
-                    b.Property<float>("pointListen")
+                    b.Property<float?>("pointListen")
                         .HasColumnType("real");
 
-                    b.Property<float>("pointRead")
+                    b.Property<float?>("pointRead")
                         .HasColumnType("real");
 
-                    b.Property<float>("pointSpeak")
+                    b.Property<float?>("pointSpeak")
                         .HasColumnType("real");
 
-                    b.Property<float>("pointWrite")
+                    b.Property<float?>("pointWrite")
                         .HasColumnType("real");
 
                     b.Property<int>("registionFormId")
@@ -213,48 +213,6 @@ namespace api.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("api.Models.Teacher", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("gender")
-                        .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("phone")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Teachers");
-                });
-
-            modelBuilder.Entity("api.Models.Watcher", b =>
-                {
-                    b.Property<int>("roomId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("teacherId")
-                        .HasColumnType("int");
-
-                    b.HasKey("roomId", "teacherId");
-
-                    b.HasIndex("teacherId");
-
-                    b.ToTable("Watchers");
-                });
-
             modelBuilder.Entity("api.Models.RegistionForm", b =>
                 {
                     b.HasOne("api.Models.Examination", "examination")
@@ -320,25 +278,6 @@ namespace api.Migrations
                     b.Navigation("level");
                 });
 
-            modelBuilder.Entity("api.Models.Watcher", b =>
-                {
-                    b.HasOne("api.Models.Room", "room")
-                        .WithMany("Watchers")
-                        .HasForeignKey("roomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("api.Models.Teacher", "teacher")
-                        .WithMany("Watchers")
-                        .HasForeignKey("teacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("room");
-
-                    b.Navigation("teacher");
-                });
-
             modelBuilder.Entity("api.Models.Examination", b =>
                 {
                     b.Navigation("RegistionForms");
@@ -361,18 +300,11 @@ namespace api.Migrations
             modelBuilder.Entity("api.Models.Room", b =>
                 {
                     b.Navigation("Results");
-
-                    b.Navigation("Watchers");
                 });
 
             modelBuilder.Entity("api.Models.Student", b =>
                 {
                     b.Navigation("RegistionForms");
-                });
-
-            modelBuilder.Entity("api.Models.Teacher", b =>
-                {
-                    b.Navigation("Watchers");
                 });
 #pragma warning restore 612, 618
         }

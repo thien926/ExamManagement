@@ -9,28 +9,45 @@ namespace ExamManagerWinform.Views
 {
     class ViewRoom : Button
     {
+        public int Id { get; set; }
         public string name { get; set; }
         public int examinationId { get; set; }
         public int levelId { get; set; }
         public int amount { get; set; }
-        public int teacherIdOne { get; set; }
-        public int teacherIdTwo { get; set; }
         public ViewRoom() { }
-        public void initial(string text)
+        public void initial(string name)
         {
+            this.name = name;
+            this.BackColor = System.Drawing.Color.LimeGreen;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.Size = new System.Drawing.Size(125, 90);
             this.TabIndex = 1;
-            this.Text = text;
             this.UseVisualStyleBackColor = false;
 
-            if(teacherIdOne <= 0 || teacherIdTwo <= 0) {
+            if (amount < 30 || amount > 35)
+            {
                 this.BackColor = System.Drawing.Color.Crimson;
             }
-            else {
+            else
+            {
                 this.BackColor = System.Drawing.Color.LimeGreen;
             }
+
+            this.Text = this.name + "\n" + this.amount + " Thí sinh";
+        }
+
+        public void apterUpdateNameOrAmount()
+        {
+            if (amount < 30 || amount > 35)
+            {
+                this.BackColor = System.Drawing.Color.Crimson;
+            }
+            else
+            {
+                this.BackColor = System.Drawing.Color.LimeGreen;
+            }
+            this.Text = this.name + "\n" + this.amount + " Thí sinh";
         }
 
 

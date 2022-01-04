@@ -32,5 +32,17 @@ namespace ExamManagerWinform.BUSs
             data.status = status;
             return RegistionFormDAO.Instance.UpdateStatusRegistionForm(data);
         }
+
+        public int getCountByExamAndLevel(int examinationId, int levelId) {
+            return RegistionFormDAO.Instance.getCountByExamAndLevel(examinationId, levelId);
+        }
+
+        public int getCountByExamAndLevelStatusTrue(int examinationId, int levelId) {
+            return RegistionFormDAO.Instance.getCountByExamAndLevelStatusTrue(examinationId, levelId);
+        }
+
+        public IEnumerable<RegistionFormDTO> getByExamAndLevelStatusTrue(int examinationId, int levelId) {
+            return RegistionFormDAO.Instance.getByExamAndLevelStatusTrue(examinationId, levelId);
+        }
     }
 }
