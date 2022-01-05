@@ -28,7 +28,7 @@ namespace ExamManagerWinform.DAOs
 
         public DataTable GetWithNameAndPhone(string name, string phone) {
             
-            string query = string.Format("SELECT s.Id, s.name as [Tên thí sinh], s.gender as [Giới tính], s.phone as [Số điện thoại], s.bornDate as [Ngày sinh], s.citizenCard as [CCCD], s.issueDate as [Ngày cấp], s.issuePlace as [Nơi cấp], s.email as [Mail], r.examRoom as [Phòng thi], r.SBD, r.pointListen as [Điểm nghe], r.pointSpeak as [Điểm nói], r.pointWrite as [Điểm viết], r.pointRead as [Điểm đọc] FROM Students as s, Results as r WHERE r.studentId = s.Id and s.name like N'%{0}%' and s.phone like '%{1}%'", name, phone);
+            string query = string.Format("SELECT s.Id, s.name as [Tên thí sinh], s.gender as [Giới tính], s.phone as [Số điện thoại], s.bornDate as [Ngày sinh], s.citizenCard as [CCCD], s.issueDate as [Ngày cấp], s.issuePlace as [Nơi cấp], s.email as [Mail], re.examinationId as [Id khóa thi], r.examRoom as [Phòng thi], r.SBD, r.pointListen as [Điểm nghe], r.pointSpeak as [Điểm nói], r.pointWrite as [Điểm viết], r.pointRead as [Điểm đọc] FROM Students as s, Results as r, RegistionForms re WHERE re.studentId = s.Id and r.registionFormId = re.Id and s.name like N'%{0}%' and s.phone like '%{1}%'", name, phone);
             var res = DataProvider.Instance.ExcuteQuery(query);
             return res;
         }
